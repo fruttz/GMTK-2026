@@ -20,19 +20,19 @@ var TOPLEFT = get
 func _physics_process(delta: float) -> void:
 	#Character Polling Inputs
 	if alive:
-    if $"../Inventory".visible == false:
-      if Input.is_action_pressed("move_up"):
-        velocity += Vector2(0,-100)*delta*speed_tier
-      if Input.is_action_pressed("move_down"):
-        velocity += Vector2(0,+100)*delta*speed_tier
-      if Input.is_action_pressed("move_left"):
-        velocity += Vector2(-100,0)*delta*speed_tier
-      if Input.is_action_pressed("move_right"):
-        velocity += Vector2(+100,0)*delta*speed_tier
-      if Input.is_action_pressed("rotate_plus"):
-        omega += 5*delta
-      if Input.is_action_pressed("rotate_minus"):
-        omega -= 5*delta
+		if $"../Inventory".visible == false:
+			if Input.is_action_pressed("move_up"):
+				velocity += Vector2(0,-100)*delta*speed_tier
+			if Input.is_action_pressed("move_down"):
+				velocity += Vector2(0,+100)*delta*speed_tier
+			if Input.is_action_pressed("move_left"):
+				velocity += Vector2(-100,0)*delta*speed_tier
+			if Input.is_action_pressed("move_right"):
+				velocity += Vector2(+100,0)*delta*speed_tier
+			if Input.is_action_pressed("rotate_plus"):
+				omega += 5*delta
+			if Input.is_action_pressed("rotate_minus"):
+				omega -= 5*delta
 	else:
 		velocity = Vector2(0,-300)
 		

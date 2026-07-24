@@ -61,7 +61,6 @@ offset_right = 261.0
 offset_bottom = -211.0
 metadata/_edit_use_anchors_ = true
 
-
 [node name="Inventory" parent="." instance=ExtResource("4_lkrc6")]
 process_mode = 3
 visible = false

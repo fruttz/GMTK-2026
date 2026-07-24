@@ -12,7 +12,6 @@ var oxygen_increment: int = 30
 var letter_array : Array[String] = []
 var type_array : Array[int] = []
 var fish_array : Array[Node] = []
-var surfacing : bool
 
 var rng = RandomNumberGenerator.new()
 
