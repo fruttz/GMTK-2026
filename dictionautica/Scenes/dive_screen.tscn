@@ -33,11 +33,18 @@ position = Vector2(1280, 2160)
 [node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
 position = Vector2(596, 313)
 
+[node name="Camera2D" type="Camera2D" parent="Submarine"]
+position = Vector2(-5, 1)
+limit_left = 0
+limit_top = -480
+limit_right = 1280
+limit_bottom = 2260
+position_smoothing_enabled = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+
 [node name="TopLeft" type="Node2D" parent="."]
 position = Vector2(100, 100)
 
 [node name="BottomRight" type="Node2D" parent="."]
 position = Vector2(1180, 620)
-
-[node name="Camera2D" type="Camera2D" parent="."]
-anchor_mode = 0
