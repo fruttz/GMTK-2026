@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b3jaacl8mtpby"]
+
+[ext_resource type="PackedScene" uid="uid://wjvnqaoktxl8" path="res://Scenes/submarine.tscn" id="1_5f54t"]
+
+[node name="DiveScreen" type="Node2D"]
+
+[node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
+position = Vector2(101, 83)
