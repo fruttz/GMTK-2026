@@ -2,7 +2,7 @@ extends Node2D
 
 #maxdepth bakal 0, -720, -1440
 var depth_tier = 1
-var maxdepth = 720
+var maxdepth = 720*3+100
 var mindepth = 100
 
 var letter_array : Array[String] = []
@@ -24,10 +24,17 @@ func _physics_process(delta: float) -> void:
 		$Submarine.position.x = $TopLeft.position.x
 		
 	#Vertical Sub Capping
+	var surfacing : bool
 	if $Submarine.position.y > maxdepth * depth_tier:
 		$Submarine.position.y = maxdepth * depth_tier
 	if $Submarine.position.y < $Sea.position.y:
+		surfacing = true
+		$Submarine/Camera2D.position.y -= 200 * delta
 		$Submarine.position.y = $Sea.position.y
+	else:
+		surfacing = false
+	if $Submarine.position.y >= $Submarine/Camera2D.position.y + 360 and not surfacing:
+		$Submarine/Camera2D.position.y = 0
 	
 	##Vertical Scrolling
 	#if $Submarine.position.y > $BottomRight.position.y:
