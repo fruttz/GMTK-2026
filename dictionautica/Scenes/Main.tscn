@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b1dnrhw4mr4tc"]
+
+[ext_resource type="Script" uid="uid://b66rk8cx6ryfj" path="res://Scenes/main.gd" id="1_r150o"]
+[ext_resource type="PackedScene" uid="uid://dc3qywifgx4f3" path="res://Scenes/Letters.tscn" id="2_idj7w"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_r150o")
+
+[node name="Letters" parent="." instance=ExtResource("2_idj7w")]
+position = Vector2(72, 77)
+
+[node name="Letters2" parent="." instance=ExtResource("2_idj7w")]
+position = Vector2(259, 77)
