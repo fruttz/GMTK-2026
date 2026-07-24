@@ -1,9 +1,9 @@
 extends Sprite2D
 var rng = RandomNumberGenerator.new()
 var velocity = Vector2(0,0)
-var cooldown : float = rng.randf_range(1.0, 2.0)
+var cooldown : float = rng.randf_range(0.5,1)
 var charge : float = 0
-var v0 : float = 150
+var v0 : float = 300
 var alive : bool = true
 
 var letter : String = "F"

@@ -5,10 +5,13 @@ var omega : float = 0
 var speed_tier : float = 2
 
 var harpoon_velocity = Vector2(0,0)
-var harpoon_range : float = 200
+var harpoon_range : float = 75
 var harpoon_loaded : bool = true
 var harpoon_speed_tier : float = 2
 var harpoon_range_tier : float = 2
+var omega_speed_tier : float = 0.5
+
+var catching : bool = true
 
 var TOPLEFT = get
 
@@ -30,7 +33,7 @@ func _physics_process(delta: float) -> void:
 	#Character Physics
 	position += delta*velocity
 	velocity = velocity/(exp(delta))
-	rotation += delta*omega
+	rotation += delta*omega*omega_speed_tier
 	omega = omega/(exp(delta))
 
 	#Harpoon Control
@@ -50,11 +53,14 @@ func store_fish():
 	pass
 
 func _on_harpoon_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	body.get_parent().catch($Harpoon)
+	if catching:
+		body.get_parent().catch($Harpoon)
+		catching = false
 	#reparent ke Harpoon 
 	
 func _on_door_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	get_parent().store(body.get_parent())
+	catching = true
 
 	
 #func _input(event: InputEvent) -> void:
