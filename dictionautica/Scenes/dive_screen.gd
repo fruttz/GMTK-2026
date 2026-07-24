@@ -4,6 +4,9 @@ extends Node2D
 var maxdepth = -1440
 var mindepth = 100
 
+var letter_array : Array[String] = []
+var type_array : Array[int] = []
+
 func _physics_process(delta: float) -> void:
 	#Horizontal Capping
 	if $Submarine.position.x > $BottomRight.position.x:
@@ -24,4 +27,10 @@ func _physics_process(delta: float) -> void:
 		if $Sea.position.y > mindepth:
 			$Sea.position.y = mindepth
 		
-		
+func store(fish):
+	#function untuk nyetor data ikan
+	letter_array.append(fish.letter)
+	type_array.append(fish.type)
+	fish.queue_free()
+	print(letter_array)
+	print(type_array)

@@ -48,6 +48,14 @@ func _physics_process(delta: float) -> void:
 func store_fish():
 	#print("storing fish")
 	pass
+
+func _on_harpoon_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	body.get_parent().catch($Harpoon)
+	#reparent ke Harpoon 
+	
+func _on_door_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
+	get_parent().store(body.get_parent())
+
 	
 #func _input(event: InputEvent) -> void:
 	##Character Event Inputs
@@ -76,3 +84,4 @@ func store_fish():
 		#if event.pressed and event.keycode == KEY_LEFT:
 			#omega -= 0.5
 	#
+pass # Replace with function body.

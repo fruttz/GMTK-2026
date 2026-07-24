@@ -9,7 +9,8 @@
 script = ExtResource("1_lkrc6")
 
 [node name="Sea" type="Sprite2D" parent="."]
-position = Vector2(0, 100)
+z_index = -2
+position = Vector2(1, 100)
 texture = ExtResource("1_hq367")
 centered = false
 
@@ -18,11 +19,17 @@ centered = false
 [node name="SeaBottomRight" type="Node2D" parent="Sea"]
 position = Vector2(1280, 2160)
 
-[node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
-position = Vector2(69, 107)
-
 [node name="Letterfish" parent="." instance=ExtResource("2_tryh3")]
 position = Vector2(877, 307)
+
+[node name="Letterfish2" parent="." instance=ExtResource("2_tryh3")]
+position = Vector2(755, 474)
+
+[node name="Letterfish3" parent="." instance=ExtResource("2_tryh3")]
+position = Vector2(985, 456)
+
+[node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
+position = Vector2(596, 313)
 
 [node name="TopLeft" type="Node2D" parent="."]
 position = Vector2(100, 100)

@@ -1,15 +1,34 @@
-[gd_scene load_steps=4 format=3 uid="uid://wjvnqaoktxl8"]
+[gd_scene load_steps=6 format=3 uid="uid://wjvnqaoktxl8"]
 
 [ext_resource type="Texture2D" uid="uid://ch6x6k4hrkcv6" path="res://Sprites/Placeholder_Submarine.png" id="1_hyx2r"]
 [ext_resource type="Script" uid="uid://b5w8icjecpl1b" path="res://Scripts/submarine.gd" id="2_74qfh"]
 [ext_resource type="Texture2D" uid="uid://du0xmpu5qul3g" path="res://Sprites/Placeholder_Harpoon.png" id="3_tq48s"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tq48s"]
+radius = 382.549
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ue3ij"]
+radius = 17.5
+
 [node name="Submarine" type="Sprite2D"]
-scale = Vector2(0.4, 1)
 texture = ExtResource("1_hyx2r")
 offset = Vector2(-10, -10)
 script = ExtResource("2_74qfh")
 
 [node name="Harpoon" type="Sprite2D" parent="."]
-scale = Vector2(0.106667, 0.0396667)
+scale = Vector2(0.05, 0.05)
 texture = ExtResource("3_tq48s")
+
+[node name="HarpoonArea" type="Area2D" parent="Harpoon"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Harpoon/HarpoonArea"]
+position = Vector2(374.999, 0)
+shape = SubResource("CircleShape2D_tq48s")
+
+[node name="DoorArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
+shape = SubResource("CircleShape2D_ue3ij")
+
+[connection signal="body_shape_entered" from="Harpoon/HarpoonArea" to="." method="_on_harpoon_body_entered"]
+[connection signal="body_shape_entered" from="DoorArea" to="." method="_on_door_body_entered"]
