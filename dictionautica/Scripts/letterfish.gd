@@ -4,15 +4,16 @@ var velocity = Vector2(0,0)
 var cooldown : float = rng.randf_range(0.5,1)
 var charge : float = 0
 var v0 : float = 300
+var v_bias : float = 5
 var alive : bool = true
 
-var letter : String = "F"
+var letter : String = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"].pick_random()
 
-enum types {BASIC}
-var type : int = types.BASIC
+enum types {MOLA}
+var type : int = types.MOLA
 
-func ready():
-	pass
+func init():
+	$Label.text = "[font_size=36]"+letter+"[/font_size]"
 
 func _physics_process(delta: float) -> void:
 	charge += delta
@@ -21,7 +22,7 @@ func _physics_process(delta: float) -> void:
 		charge = 0
 		cooldown = rng.randf_range(1.0, 2.0)
 	#Character Physics
-	velocity.x -= 1
+	velocity.x -= v_bias
 	position += delta*velocity
 	velocity = velocity/(exp(delta))
 		

@@ -2,7 +2,7 @@ extends Sprite2D
 
 var velocity = Vector2(0,0)
 var omega : float = 0
-var speed_tier : float = 2
+var speed_tier : float = 3
 
 var harpoon_velocity = Vector2(0,0)
 var harpoon_range : float = 75
