@@ -8,6 +8,7 @@ var mindepth = 100
 var letter_array : Array[String] = []
 var type_array : Array[int] = []
 var fish_array : Array[Node] = []
+var surfacing : bool
 
 var rng = RandomNumberGenerator.new()
 
@@ -24,7 +25,6 @@ func _physics_process(delta: float) -> void:
 		$Submarine.position.x = $TopLeft.position.x
 		
 	#Vertical Sub Capping
-	var surfacing : bool
 	if $Submarine.position.y > maxdepth * depth_tier:
 		$Submarine.position.y = maxdepth * depth_tier
 	if $Submarine.position.y < $Sea.position.y:
@@ -64,10 +64,23 @@ func _physics_process(delta: float) -> void:
 	for fish in fish_array:
 		if fish.position.y < $Sea.position.y:
 			fish.position.y = $Sea.position.y
-		
-		
-		
-		
+	
+	if surfacing:
+		$Inventory_Button.disabled = false
+	else:
+		$Inventory_Button.disabled = true
+	
+func  _input(event: InputEvent) -> void:
+	if event.is_action_pressed("spelling_game"):
+		if $Inventory.visible == true:
+			$Inventory.visible = false
+			$Submarine/Camera2D.make_current()
+		elif surfacing:
+			$Inventory.visible = true
+			$Inventory/Camera2D.make_current()
+			$Inventory.setup(letter_array)
+			letter_array.clear()
+
 func store(fish):
 	#function untuk nyetor data ikan
 	letter_array.append(fish.letter)
@@ -88,8 +101,15 @@ func ready():
 	
 func spawn(Spawner, _mode : int):
 	#mola_mode
-	var new_mola = Mola.instantiate()
-	add_child(new_mola)
-	new_mola.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
-	new_mola.init()
-	fish_array.append(new_mola)
+	if not surfacing and $Inventory.visible == false:
+		var new_mola = Mola.instantiate()
+		add_child(new_mola)
+		new_mola.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
+		new_mola.init()
+		fish_array.append(new_mola)
+
+func _on_inventory_button_button_down() -> void:
+	$Inventory.visible = true
+	$Inventory/Camera2D.make_current()
+	$Inventory.setup(letter_array)
+	letter_array.clear()
