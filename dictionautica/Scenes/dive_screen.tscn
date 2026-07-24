@@ -32,7 +32,7 @@ position = Vector2(1500, 1800)
 position = Vector2(1280, 2160)
 
 [node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
-position = Vector2(596, 313)
+position = Vector2(640, 100)
 
 [node name="Camera2D" type="Camera2D" parent="Submarine"]
 position = Vector2(-5, 1)
@@ -45,10 +45,22 @@ editor_draw_limits = true
 editor_draw_drag_margin = true
 
 [node name="TopLeft" type="Node2D" parent="."]
-position = Vector2(100, 100)
+position = Vector2(100, 0)
 
 [node name="BottomRight" type="Node2D" parent="."]
 position = Vector2(1180, 620)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+offset = Vector2(0, 300)
+transform = Transform2D(1, 0, 0, 1, 0, 300)
+
+[node name="OxygenBar" type="ProgressBar" parent="UILayer"]
+offset_left = 24.0
+offset_top = -238.0
+offset_right = 261.0
+offset_bottom = -211.0
+metadata/_edit_use_anchors_ = true
+
 
 [node name="Inventory" parent="." instance=ExtResource("4_lkrc6")]
 process_mode = 3
