@@ -1,8 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://b3jaacl8mtpby"]
+[gd_scene load_steps=5 format=3 uid="uid://b3jaacl8mtpby"]
 
 [ext_resource type="PackedScene" uid="uid://wjvnqaoktxl8" path="res://Scenes/submarine.tscn" id="1_5f54t"]
+[ext_resource type="Texture2D" uid="uid://c7twqmtjujbf1" path="res://Sprites/Placeholder_Sea.png" id="1_hq367"]
+[ext_resource type="Script" uid="uid://db12vk1sdxnos" path="res://Scenes/dive_screen.gd" id="1_lkrc6"]
+[ext_resource type="PackedScene" uid="uid://dxw1rpbx0si2r" path="res://Scenes/letterfish.tscn" id="2_tryh3"]
 
 [node name="DiveScreen" type="Node2D"]
+script = ExtResource("1_lkrc6")
+
+[node name="Sea" type="Sprite2D" parent="."]
+position = Vector2(0, 100)
+texture = ExtResource("1_hq367")
+centered = false
+
+[node name="SeaTopLeft" type="Node2D" parent="Sea"]
+
+[node name="SeaBottomRight" type="Node2D" parent="Sea"]
+position = Vector2(1280, 2160)
 
 [node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
-position = Vector2(101, 83)
+position = Vector2(69, 107)
+
+[node name="Letterfish" parent="." instance=ExtResource("2_tryh3")]
+position = Vector2(877, 307)
+
+[node name="TopLeft" type="Node2D" parent="."]
+position = Vector2(100, 100)
+
+[node name="BottomRight" type="Node2D" parent="."]
+position = Vector2(1180, 620)

@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxw1rpbx0si2r"]
+
+[ext_resource type="Texture2D" uid="uid://bwuj3g32xkafk" path="res://Sprites/Placeholder_Letterfish.png" id="1_a5772"]
+[ext_resource type="Script" uid="uid://dvremc0nn1417" path="res://Scripts/letterfish.gd" id="2_c5uqf"]
+
+[node name="Letterfish" type="Sprite2D"]
+texture = ExtResource("1_a5772")
+script = ExtResource("2_c5uqf")

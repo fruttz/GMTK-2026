@@ -10,6 +10,8 @@ var harpoon_loaded : bool = true
 var harpoon_speed_tier : float = 2
 var harpoon_range_tier : float = 2
 
+var TOPLEFT = get
+
 func _physics_process(delta: float) -> void:
 	#Character Polling Inputs
 	if Input.is_action_pressed("move_up"):
@@ -31,20 +33,22 @@ func _physics_process(delta: float) -> void:
 	rotation += delta*omega
 	omega = omega/(exp(delta))
 
-	#Harpoon Physics
-	
+	#Harpoon Control
 	if Input.is_action_pressed("launch_harpoon"):
 		harpoon_velocity = Vector2(100,0)
 	else:
 		harpoon_velocity = Vector2(-100,0)
-	
 	$Harpoon.position += harpoon_velocity*delta*harpoon_speed_tier
-	
 	if $Harpoon.position.x > harpoon_range*harpoon_range_tier:
 		$Harpoon.position = Vector2(harpoon_range*harpoon_range_tier,0)
 	if 0 > $Harpoon.position.x :
 		$Harpoon.position = Vector2(0,0)
+		store_fish()
 
+func store_fish():
+	#print("storing fish")
+	pass
+	
 #func _input(event: InputEvent) -> void:
 	##Character Event Inputs
 	#if event.is_action_pressed("launch_harpoon"):
