@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Dictionautica"
-run/main_scene="uid://b1dnrhw4mr4tc"
+run/main_scene="uid://b3jaacl8mtpby"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
