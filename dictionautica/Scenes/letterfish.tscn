@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://dxw1rpbx0si2r"]
+
+[ext_resource type="Texture2D" uid="uid://bwuj3g32xkafk" path="res://Sprites/Placeholder_Letterfish.png" id="1_a5772"]
+[ext_resource type="Script" uid="uid://dvremc0nn1417" path="res://Scripts/letterfish.gd" id="2_c5uqf"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c5uqf"]
+radius = 47.2652
+
+[node name="Letterfish" type="Sprite2D"]
+z_index = -1
+texture = ExtResource("1_a5772")
+script = ExtResource("2_c5uqf")
+
+[node name="Hitbox" type="RigidBody2D" parent="."]
+freeze = true
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+shape = SubResource("CircleShape2D_c5uqf")
