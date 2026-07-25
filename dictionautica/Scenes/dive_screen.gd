@@ -19,7 +19,9 @@ var spawn_cooldown_array: Array[float] = [rng.randf_range(0.5,1),rng.randf_range
 var spawn_charge_array: Array[float] = [0,0,0]
 var surfacing : bool
 
-var Mola = preload("res://Scenes/Mola.tscn")
+var Letta = preload("res://Scenes/Letta.tscn")
+var Suffish = preload("res://Scenes/Suffish.tscn")
+var Andies = preload("res://Scenes/Andies.tscn")
 
 signal oxygen_refilled
 
@@ -37,7 +39,6 @@ func submarine_died():
 	var letter_array  = []
 	var type_array = []
 	$Submarine.die()
-	print("you dieded")
 #note to self: kasih juice lah biar mati kerasa kaya mati
 
 func main_upgrade():
@@ -99,13 +100,13 @@ func _physics_process(delta: float) -> void:
 			spawn_charge_array[i] = 0
 	#Fish Despawning
 	for fish in fish_array:
-		if fish.position.x < $Sea/Despawner.position.x:
+		if fish.position.x > $Sea/Despawner.position.x:
 			fish_array.erase(fish)
 			fish.queue_free()
-	#Fish Vertical Capping
+	#Fish Vertical Capping, max 200 dari top
 	for fish in fish_array:
-		if fish.position.y < $Sea.position.y:
-			fish.position.y = $Sea.position.y
+		if fish.position.y < $Sea.position.y + 200:
+			fish.position.y = $Sea.position.y + 200
 	
 	if surfacing:
 		$Inventory_Button.disabled = false
@@ -124,12 +125,23 @@ func  _input(event: InputEvent) -> void:
 			letter_array.clear()
 
 func store(fish):
-	#function untuk nyetor data ikan
-	letter_array.append(fish.letter)
-	type_array.append(fish.type)
-	fish_array.erase(fish)
-	fish.queue_free()
-
+	#function untuk nyetor data ikan, kalo andies beda
+	if not fish.is_andies:
+		letter_array.append(fish.letter)
+		type_array.append(fish.type)
+		fish_array.erase(fish)
+		fish.queue_free()
+	else:
+		print("andies stored")
+		print(fish.andy_letters)
+		letter_array += (fish.andy_letters)
+		type_array += (fish.andy_types)
+		fish_array.erase(fish)
+		fish.queue_free()
+	print(letter_array)
+	print(type_array)
+	
+	
 func ready():
 	spawn($Spawner1, 1)
 	spawn($Spawner1, 2)
@@ -142,13 +154,30 @@ func ready():
 	spawn($Spawner1, 3)
 	
 func spawn(Spawner, _mode : int):
-	#mola_mode
-	if not surfacing and $Inventory.visible == false:
-		var new_mola = Mola.instantiate()
-		add_child(new_mola)
-		new_mola.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
-		new_mola.init()
-		fish_array.append(new_mola)
+	#var fish = ["Andies","Andies","Andies"].pick_random()
+	var fish = ["Letta","Letta","Letta","Letta","Letta","Suffish","Andies"].pick_random()
+	match(fish):
+		"Letta":
+			if not surfacing and $Inventory.visible == false:
+				var new_Letta = Letta.instantiate()
+				add_child(new_Letta)
+				new_Letta.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
+				new_Letta.init()
+				fish_array.append(new_Letta)
+		"Suffish":
+			if not surfacing and $Inventory.visible == false:
+				var new_suffish = Suffish.instantiate()
+				add_child(new_suffish)
+				new_suffish.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
+				new_suffish.init()
+				fish_array.append(new_suffish)
+		"Andies":
+			if not surfacing and $Inventory.visible == false:
+				var new_andies = Andies.instantiate()
+				add_child(new_andies)
+				new_andies.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
+				new_andies.init()
+				fish_array.append(new_andies)
 
 func _on_inventory_button_button_down() -> void:
 	$Inventory.visible = true
