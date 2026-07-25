@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dap210v1vfoaq"
-path="res://.godot/imported/Some Time Later.otf-128531075500790a2517a7909cd74e03.fontdata"
+uid="uid://cm5asjsieu6ji"
+path="res://.godot/imported/SNPro.ttf-691087e8215dd6ee181d2fe76430dc76.fontdata"
 
 [deps]
 
-source_file="res://Sprites/Some Time Later.otf"
-dest_files=["res://.godot/imported/Some Time Later.otf-128531075500790a2517a7909cd74e03.fontdata"]
+source_file="res://Sprites/SNPro.ttf"
+dest_files=["res://.godot/imported/SNPro.ttf-691087e8215dd6ee181d2fe76430dc76.fontdata"]
 
 [params]
 

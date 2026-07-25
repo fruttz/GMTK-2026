@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 var rng = RandomNumberGenerator.new()
 var velocity = Vector2(0,0)
 var cooldown : float = rng.randf_range(0.5,1)
@@ -6,8 +6,13 @@ var charge : float = 0
 var v0 : float = 300
 var v_bias : float = 5
 var alive : bool = true
+var caught: bool = false
+var omega: float = 1
+var is_andies : bool = false
 
-var letter : String = ["A", "A", "A", "A", "A", "A", "A", "A", "A",
+#Andy dan Suffish bakal inherit kelas ini tapi datanya gw ganti, maybe physicsnya
+@export var letter : String = [
+  "A", "A", "A", "A", "A", "A", "A", "A", "A",
   "B", "B",
   "C", "C",
   "D", "D", "D", "D",
@@ -32,28 +37,34 @@ var letter : String = ["A", "A", "A", "A", "A", "A", "A", "A", "A",
   "W", "W",
   "X",
   "Y", "Y",
-  "Z"].pick_random()
-
-enum types {MOLA}
-var type : int = types.MOLA
+  "Z",
+  "*", "*"
+].pick_random()
+enum types {LETTA,SUFFISH,ANDY}
+@export var type : int = types.LETTA
 
 func init():
-	$Label.text = "[font_size=36]"+letter+"[/font_size]"
+	$Sprite/Label.text = letter
 
 func _physics_process(delta: float) -> void:
-	charge += delta
-	if charge > cooldown:
-		velocity += Vector2.from_angle(randf_range(0,2*PI))*v0
-		charge = 0
-		cooldown = rng.randf_range(1.0, 2.0)
-	#Character Physics
-	velocity.x -= v_bias
-	position += delta*velocity
-	velocity = velocity/(exp(delta))
+	if not caught:
+		charge += delta
+		if charge > cooldown:
+			velocity += Vector2.from_angle(randf_range(0,2*PI))*v0
+			charge = 0
+			cooldown = rng.randf_range(1.0, 2.0)
+		#Character Physics
+		velocity.x += v_bias
+		position += delta*velocity
+		velocity = velocity/(exp(delta))
+	else:
+		rotation += delta*omega
+		self.position = get_parent().position
+		#just fucking update its position again bruh
 		
 func catch(catcher_node):
-	set_physics_process(false)
+	caught = true
+	set_global_position(catcher_node.get_node("Area").get_global_position())
 	self.call_deferred("reparent", catcher_node)
-	self.set_deferred("position", Vector2(0,0))
-
+	
 		
