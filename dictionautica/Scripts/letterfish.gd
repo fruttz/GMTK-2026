@@ -1,4 +1,4 @@
-extends Sprite2D
+extends Node2D
 var rng = RandomNumberGenerator.new()
 var velocity = Vector2(0,0)
 var cooldown : float = rng.randf_range(0.5,1)
@@ -7,29 +7,62 @@ var v0 : float = 300
 var v_bias : float = 5
 var alive : bool = true
 var caught: bool = false
+var omega: float = 1
 
 #Andy dan Suffish bakal inherit kelas ini tapi datanya gw ganti, maybe physicsnya
-var letter : String = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"].pick_random()
-enum types {MOLA}
-var type : int = types.MOLA
+@export var letter : String = [
+  "A", "A", "A", "A", "A", "A", "A", "A", "A",
+  "B", "B",
+  "C", "C",
+  "D", "D", "D", "D",
+  "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E", "E",
+  "F", "F",
+  "G", "G", "G",
+  "H", "H",
+  "I", "I", "I", "I", "I", "I", "I", "I", "I",
+  "J",
+  "K",
+  "L", "L", "L", "L",
+  "M", "M",
+  "N", "N", "N", "N", "N", "N",
+  "O", "O", "O", "O", "O", "O", "O", "O",
+  "P", "P",
+  "Q",
+  "R", "R", "R", "R", "R", "R",
+  "S", "S", "S", "S",
+  "T", "T", "T", "T", "T", "T",
+  "U", "U", "U", "U",
+  "V", "V",
+  "W", "W",
+  "X",
+  "Y", "Y",
+  "Z",
+  "*", "*"
+].pick_random()
+enum types {MOLA,SUFFISH}
+@export var type : int = types.MOLA
 
 func init():
-	$Label.text = "[font_size=36]"+letter+"[/font_size]"
+	$Sprite/Label.text = letter
 
 func _physics_process(delta: float) -> void:
-	charge += delta
-	if charge > cooldown:
-		velocity += Vector2.from_angle(randf_range(0,2*PI))*v0
-		charge = 0
-		cooldown = rng.randf_range(1.0, 2.0)
-	#Character Physics
-	velocity.x -= v_bias
-	position += delta*velocity
-	velocity = velocity/(exp(delta))
+	if not caught:
+		charge += delta
+		if charge > cooldown:
+			velocity += Vector2.from_angle(randf_range(0,2*PI))*v0
+			charge = 0
+			cooldown = rng.randf_range(1.0, 2.0)
+		#Character Physics
+		velocity.x += v_bias
+		position += delta*velocity
+		velocity = velocity/(exp(delta))
+	else:
+		rotation += delta*omega
+		self.position = get_parent().position
+		#just fucking update its position again bruh
 		
 func catch(catcher_node):
-	set_physics_process(false)
+	set_global_position(catcher_node.get_node("Caught").get_global_position())
 	self.call_deferred("reparent", catcher_node)
-	self.set_deferred("position", Vector2(0,0))
 	caught = true
 		

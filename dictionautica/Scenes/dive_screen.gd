@@ -20,6 +20,7 @@ var spawn_charge_array: Array[float] = [0,0,0]
 var surfacing : bool
 
 var Mola = preload("res://Scenes/Mola.tscn")
+var Suffish = preload("res://Scenes/Suffish.tscn")
 
 signal oxygen_refilled
 
@@ -37,7 +38,6 @@ func submarine_died():
 	var letter_array  = []
 	var type_array = []
 	$Submarine.die()
-	print("you dieded")
 #note to self: kasih juice lah biar mati kerasa kaya mati
 
 func main_upgrade():
@@ -99,13 +99,13 @@ func _physics_process(delta: float) -> void:
 			spawn_charge_array[i] = 0
 	#Fish Despawning
 	for fish in fish_array:
-		if fish.position.x < $Sea/Despawner.position.x:
+		if fish.position.x > $Sea/Despawner.position.x:
 			fish_array.erase(fish)
 			fish.queue_free()
-	#Fish Vertical Capping
+	#Fish Vertical Capping, max 200 dari top
 	for fish in fish_array:
-		if fish.position.y < $Sea.position.y:
-			fish.position.y = $Sea.position.y
+		if fish.position.y < $Sea.position.y + 200:
+			fish.position.y = $Sea.position.y + 200
 	
 	if surfacing:
 		$Inventory_Button.disabled = false
@@ -142,13 +142,22 @@ func ready():
 	spawn($Spawner1, 3)
 	
 func spawn(Spawner, _mode : int):
-	#mola_mode
-	if not surfacing and $Inventory.visible == false:
-		var new_mola = Mola.instantiate()
-		add_child(new_mola)
-		new_mola.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
-		new_mola.init()
-		fish_array.append(new_mola)
+	var fish = ["Mola","Mola","Mola","Mola","Mola","Mola","Suffish"].pick_random()
+	match(fish):
+		"Mola":
+			if not surfacing and $Inventory.visible == false:
+				var new_mola = Mola.instantiate()
+				add_child(new_mola)
+				new_mola.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
+				new_mola.init()
+				fish_array.append(new_mola)
+		"Suffish":
+			if not surfacing and $Inventory.visible == false:
+				var new_suffish = Suffish.instantiate()
+				add_child(new_suffish)
+				new_suffish.position = Spawner.position + Vector2(0, rng.randf_range(-300,300))
+				new_suffish.init()
+				fish_array.append(new_suffish)
 
 func _on_inventory_button_button_down() -> void:
 	$Inventory.visible = true

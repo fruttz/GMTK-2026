@@ -15,16 +15,16 @@ texture = ExtResource("1_hq367")
 centered = false
 
 [node name="Despawner" type="Node2D" parent="Sea"]
-position = Vector2(-300, 0)
+position = Vector2(1520, 0)
 
 [node name="Spawner1" type="Node2D" parent="Sea"]
-position = Vector2(1500, 360)
+position = Vector2(-300, 360)
 
 [node name="Spawner2" type="Node2D" parent="Sea"]
-position = Vector2(1500, 1080)
+position = Vector2(-300, 1080)
 
 [node name="Spawner3" type="Node2D" parent="Sea"]
-position = Vector2(1500, 1800)
+position = Vector2(-300, 1800)
 
 [node name="SeaTopLeft" type="Node2D" parent="Sea"]
 

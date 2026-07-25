@@ -5,7 +5,7 @@ var omega : float = 0
 var speed_tier : float = 3
 
 var harpoon_velocity = Vector2(0,0)
-var harpoon_range : float = 300
+var harpoon_range : float = 75
 var harpoon_loaded : bool = true
 var harpoon_speed_tier : float = 6
 var harpoon_range_tier : float = 2
@@ -37,24 +37,24 @@ func _physics_process(delta: float) -> void:
 	#Character Physics
 	position += delta*velocity
 	velocity = velocity/(exp(delta))
-	$SubmarineSprite.rotation += delta*omega*omega_speed_tier
+	$SubRotator.rotation += delta*omega*omega_speed_tier
 	omega = omega/(exp(delta))
 
 	#Harpoon Control
 	if alive and Input.is_action_pressed("launch_harpoon"):
-		harpoon_velocity = Vector2(-100,0)
+		harpoon_velocity = Vector2(-50,0)
 	else:
-		harpoon_velocity = Vector2(100,0)
-	$SubmarineSprite/Harpoon.position += harpoon_velocity*delta*harpoon_speed_tier
-	if $SubmarineSprite/Harpoon.position.x < -harpoon_range*harpoon_range_tier:
-		$SubmarineSprite/Harpoon.position.x = -harpoon_range*harpoon_range_tier
+		harpoon_velocity = Vector2(50,0)
+	$SubRotator/Harpoon.position += harpoon_velocity*delta*harpoon_speed_tier
+	if $SubRotator/Harpoon.position.x < -harpoon_range*harpoon_range_tier:
+		$SubRotator/Harpoon.position.x = -harpoon_range*harpoon_range_tier
 		#harpoon memanjang ke kiri jadinya minus lol
-	if -12 < $SubmarineSprite/Harpoon.position.x :
-		$SubmarineSprite/Harpoon.position.x = -12
+	if -12 < $SubRotator/Harpoon.position.x :
+		$SubRotator/Harpoon.position.x = -12
 		#print("limit guard")
 		store_fish()
 	#Harpoon Cable
-	$SubmarineSprite/HandChain.scale.x = ($SubmarineSprite/HandGuard.position.x - $SubmarineSprite/Harpoon.position.x)/76
+	$SubRotator/HandChain.scale.x = ($SubRotator/HandGuard.position.x - $SubRotator/Harpoon.position.x)/76
 	
 func store_fish():
 	#print("storing fish")
@@ -62,7 +62,7 @@ func store_fish():
 
 func _on_harpoon_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if catching:
-		body.get_parent().catch($SubmarineSprite/Harpoon)
+		body.get_parent().catch($SubRotator/Harpoon)
 		catching = false
 	#reparent ke Harpoon 
 	

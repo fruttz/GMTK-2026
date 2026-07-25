@@ -6,42 +6,49 @@
 [ext_resource type="Texture2D" uid="uid://cjkpg5ngegipj" path="res://Sprites/Submarine/Hand Guard.png" id="5_wqqa5"]
 [ext_resource type="Texture2D" uid="uid://bypargw7pgivn" path="res://Sprites/Submarine/Hand Claw.png" id="6_45lfp"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tq48s"]
-radius = 145.497
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_je60v"]
+radius = 60.0
+height = 272.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ue3ij"]
-radius = 53.3385
+radius = 56.0
 
 [node name="Submarine" type="Node2D"]
 script = ExtResource("2_74qfh")
 
-[node name="SubmarineSprite" type="Sprite2D" parent="."]
+[node name="SubRotator" type="Node2D" parent="."]
+
+[node name="SubmarineSprite" type="Sprite2D" parent="SubRotator"]
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_tq48s")
-offset = Vector2(-10, -10)
 flip_h = true
 
-[node name="HandChain" type="Sprite2D" parent="SubmarineSprite"]
-position = Vector2(-8, 116)
+[node name="HandChain" type="Sprite2D" parent="SubRotator"]
+position = Vector2(-2, 29)
 rotation = 3.14159
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("4_s8co7")
 centered = false
 
-[node name="HandGuard" type="Sprite2D" parent="SubmarineSprite"]
-position = Vector2(48, -8)
+[node name="HandGuard" type="Sprite2D" parent="SubRotator"]
+position = Vector2(12, -2)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("5_wqqa5")
 
-[node name="Harpoon" type="Sprite2D" parent="SubmarineSprite"]
-position = Vector2(-12, -12)
+[node name="Harpoon" type="Sprite2D" parent="SubRotator"]
+position = Vector2(-50, 25)
+scale = Vector2(0.25, 0.25)
 texture = ExtResource("6_45lfp")
 flip_h = true
 
-[node name="HarpoonArea" type="Area2D" parent="SubmarineSprite/Harpoon"]
-position = Vector2(-224, 96)
+[node name="Area" type="Area2D" parent="SubRotator/Harpoon"]
+position = Vector2(-64, -4)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubmarineSprite/Harpoon/HarpoonArea"]
-position = Vector2(-4, 16)
-shape = SubResource("CircleShape2D_tq48s")
+[node name="Shape" type="CollisionShape2D" parent="SubRotator/Harpoon/Area"]
+shape = SubResource("CapsuleShape2D_je60v")
+
+[node name="Caught" type="Node2D" parent="SubRotator/Harpoon"]
+position = Vector2(-64, -192)
 
 [node name="DoorArea" type="Area2D" parent="."]
 
@@ -49,5 +56,5 @@ shape = SubResource("CircleShape2D_tq48s")
 position = Vector2(3, -5)
 shape = SubResource("CircleShape2D_ue3ij")
 
-[connection signal="body_shape_entered" from="SubmarineSprite/Harpoon/HarpoonArea" to="." method="_on_harpoon_body_entered"]
+[connection signal="body_shape_entered" from="SubRotator/Harpoon/Area" to="." method="_on_harpoon_body_entered"]
 [connection signal="body_shape_entered" from="DoorArea" to="." method="_on_door_body_entered"]
