@@ -12,16 +12,19 @@ func setup(possible_letters):
 	var rng = RandomNumberGenerator.new()
 	var pos : Vector2
 	var type
-	for l in possible_letters + ["ING"]:
-		var x = rng.randf_range($Letter_Panel.position.x + 64, $Letter_Panel.size.x - 64)
-		var y = rng.randf_range($Letter_Panel.position.y + 64, $Letter_Panel.size.y - 64)
+	for l in possible_letters:
+		var x = rng.randf_range($"../Letter_Panel".position.x + 64, $"../Letter_Panel".size.x - 64)
+		var y = rng.randf_range($"../Letter_Panel".position.y + 64, $"../Letter_Panel".size.y - 64)
 		pos.x = x
 		pos.y = y
 		if l.length() > 1:
 			type = "suffish"
+		elif l == l.to_lower():
+			type = "andies"
 		else:
 			type = "letta"
 		add_letters(l, type, pos)
+
 		
 			
 			

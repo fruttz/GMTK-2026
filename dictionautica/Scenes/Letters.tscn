@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://dc3qywifgx4f3"]
 
 [ext_resource type="Script" uid="uid://md4l1w1j80jf" path="res://Scenes/letters.gd" id="1_ur7m0"]
-[ext_resource type="Texture2D" uid="uid://cbgukxsbw5uyr" path="res://Sprites/Game Jam/Fish Regular/LettaLetta.png" id="2_wbqax"]
-[ext_resource type="FontFile" uid="uid://2331hwp4xx8p" path="res://Sprites/Some Time Later.otf" id="3_228xi"]
+[ext_resource type="Texture2D" uid="uid://6oqf4voc6rej" path="res://Sprites/Letter_Tiles.webp" id="2_wbqax"]
+[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="3_228xi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7m0"]
 size = Vector2(97, 97)
@@ -11,7 +11,6 @@ size = Vector2(97, 97)
 input_pickable = true
 mass = 0.001
 gravity_scale = 0.0
-center_of_mass_mode = 1
 can_sleep = false
 lock_rotation = true
 script = ExtResource("1_ur7m0")

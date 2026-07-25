@@ -151,26 +151,44 @@ func  _input(event: InputEvent) -> void:
 			$Inventory.visible = false
 			$Submarine/Camera2D.make_current()
 			oxygen = oxygen_max
+			letter_array.clear()
+			$Inventory.clear_letters()
 		elif surfacing:
 			$Inventory.visible = true
 			$Inventory/Camera2D.make_current()
 			$Inventory.setup(letter_array)
-			letter_array.clear()
-      
+	  
 func mission1_upgrade():
 	print("mission1 upgrade")
 	$Submarine.speed_tier += 1
 	$UILayer/Mission/Mission1.text = "- [s]Spell a word at least 7 letter long[/s]"
+	$UILayer/UpgradePanel.visible = true
+	$UILayer/UpgradePanel/Sub_Speed.visible = true
+	await get_tree().create_timer(3).timeout
+	$UILayer/UpgradePanel.visible = false
+	$UILayer/UpgradePanel/Rot_Speed.visible = false
+
 
 func mission2_upgrade():
 	print("mission2 upgrade")
 	$Submarine.omega_speed_tier += 1
 	$UILayer/Mission/Mission2.text = "- [s]Spell a word with adjacent double letters[/s]"
+	$UILayer/UpgradePanel.visible = true
+	$UILayer/UpgradePanel/Rot_Speed.visible = true
+	await get_tree().create_timer(3).timeout
+	$UILayer/UpgradePanel.visible = false
+	$UILayer/UpgradePanel/Rot_Speed.visible = false
 
 func mission3_upgrade():
 	print("mission3 upgrade")
-	$Submarine.arm_range_tier += 1
+	$Submarine.harpoon_range_tier += 1
 	$UILayer/Mission/Mission3.text = "- [s]Spell a word starting with J,X,Q or Z[/s]"
+	$UILayer/UpgradePanel.visible = true
+	$UILayer/UpgradePanel/Arm_Range.visible = true
+	await get_tree().create_timer(3).timeout
+	$UILayer/UpgradePanel.visible = false
+	$UILayer/UpgradePanel/Rot_Speed.visible = false
+
 
 func store(fish):
 	#function untuk nyetor data ikan, kalo andies beda

@@ -18,7 +18,14 @@ func set_score(new_score):
 func get_score():
 	return $"..".score
 
+func clear_letters():
+	if !$Letter_Container.get_children().is_empty():
+		for c in $Letter_Container.get_children():
+			c.queue_free()
+
 func _on_exit_button_down() -> void:
 	self.visible = false
 	get_parent().get_node("Submarine/Camera2D").make_current()
 	$"..".oxygen = $"..".oxygen_max
+	$"..".letter_array.clear()
+	clear_letters()

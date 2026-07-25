@@ -3,12 +3,13 @@
 [ext_resource type="Script" uid="uid://bk03ibanpbxjg" path="res://Scenes/w_container.gd" id="1_vba0b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_714gh"]
-size = Vector2(1228, 189)
+size = Vector2(1242, 235)
 
 [node name="Container" type="Node2D"]
 script = ExtResource("1_vba0b")
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 offset_left = -591.0
 offset_top = -95.0
 offset_right = 638.0
@@ -17,7 +18,7 @@ offset_bottom = 96.0
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(23, 1)
+position = Vector2(34, -21.5)
 shape = SubResource("RectangleShape2D_714gh")
 
 [node name="Submit" type="Button" parent="."]
