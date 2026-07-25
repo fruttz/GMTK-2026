@@ -62,7 +62,8 @@ func _physics_process(delta: float) -> void:
 		#just fucking update its position again bruh
 		
 func catch(catcher_node):
-	set_global_position(catcher_node.get_node("Caught").get_global_position())
-	self.call_deferred("reparent", catcher_node)
 	caught = true
+	set_global_position(catcher_node.get_node("Area").get_global_position())
+	self.call_deferred("reparent", catcher_node)
+	
 		

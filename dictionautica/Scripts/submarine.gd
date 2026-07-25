@@ -61,16 +61,13 @@ func store_fish():
 	pass
 
 func _on_harpoon_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	if catching:
+	if catching and $SubRotator/Harpoon.get_child_count() == 1:
 		body.get_parent().catch($SubRotator/Harpoon)
-		catching = false
 	#reparent ke Harpoon 
 	
 func _on_door_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if stashing:
 		get_parent().store(body.get_parent())
-		if body.get_parent().caught:
-			catching = true
 
 func die():
 	stashing = false

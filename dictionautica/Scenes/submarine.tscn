@@ -47,9 +47,6 @@ position = Vector2(-64, -4)
 [node name="Shape" type="CollisionShape2D" parent="SubRotator/Harpoon/Area"]
 shape = SubResource("CapsuleShape2D_je60v")
 
-[node name="Caught" type="Node2D" parent="SubRotator/Harpoon"]
-position = Vector2(-64, -192)
-
 [node name="DoorArea" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
