@@ -8,6 +8,7 @@ var v_bias : float = 5
 var alive : bool = true
 var caught: bool = false
 var omega: float = 1
+var is_andies : bool = false
 
 #Andy dan Suffish bakal inherit kelas ini tapi datanya gw ganti, maybe physicsnya
 @export var letter : String = [
@@ -39,8 +40,8 @@ var omega: float = 1
   "Z",
   "*", "*"
 ].pick_random()
-enum types {MOLA,SUFFISH}
-@export var type : int = types.MOLA
+enum types {LETTA,SUFFISH,ANDY}
+@export var type : int = types.LETTA
 
 func init():
 	$Sprite/Label.text = letter

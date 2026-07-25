@@ -1,14 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://dxw1rpbx0si2r"]
 
-[ext_resource type="Texture2D" uid="uid://bffqkjh7ux2y3" path="res://Sprites/Fish Regular/LettaLetta.png" id="1_ndrtc"]
-[ext_resource type="Script" uid="uid://dvremc0nn1417" path="res://Scripts/letterfish.gd" id="2_c5uqf"]
-[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="3_3xj84"]
+[ext_resource type="Script" uid="uid://dvremc0nn1417" path="res://Scripts/letterfish.gd" id="1_nx4fh"]
+[ext_resource type="Texture2D" uid="uid://bffqkjh7ux2y3" path="res://Sprites/Fish Regular/LettaLetta.png" id="2_lx7ol"]
+[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="3_ppyht"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bend1"]
 size = Vector2(71, 137)
 
 [node name="Letta" type="Node2D"]
-script = ExtResource("2_c5uqf")
+script = ExtResource("1_nx4fh")
 
 [node name="Hitbox" type="RigidBody2D" parent="."]
 freeze = true
@@ -20,7 +20,7 @@ shape = SubResource("RectangleShape2D_bend1")
 [node name="Sprite" type="Sprite2D" parent="."]
 z_index = -1
 scale = Vector2(0.25, 0.25)
-texture = ExtResource("1_ndrtc")
+texture = ExtResource("2_lx7ol")
 
 [node name="Label" type="RichTextLabel" parent="Sprite"]
 offset_left = -52.0
@@ -31,7 +31,7 @@ theme_override_colors/default_color = Color(0.419608, 0.552941, 0.345098, 1)
 theme_override_colors/font_selected_color = Color(0.419608, 0.552941, 0.345098, 1)
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 28
-theme_override_fonts/normal_font = ExtResource("3_3xj84")
+theme_override_fonts/normal_font = ExtResource("3_ppyht")
 theme_override_font_sizes/normal_font_size = 160
 bbcode_enabled = true
 text = "A"

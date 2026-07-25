@@ -1,0 +1,81 @@
+[gd_scene load_steps=5 format=3 uid="uid://wsghf4r4q1ot"]
+
+[ext_resource type="Script" uid="uid://dglau1xyekacu" path="res://Scenes/andies.gd" id="1_o5ikt"]
+[ext_resource type="Texture2D" uid="uid://cuy68g2nqs1v1" path="res://Sprites/Fish Regular/Andy.png" id="2_o5ikt"]
+[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="3_a5kb3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_vwpmw"]
+size = Vector2(149, 61)
+
+[node name="Andies" type="Node2D"]
+script = ExtResource("1_o5ikt")
+
+[node name="Hitbox" type="RigidBody2D" parent="."]
+freeze = true
+
+[node name="HitboxShape" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(3, 1.5)
+shape = SubResource("RectangleShape2D_vwpmw")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-36, 16)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_o5ikt")
+
+[node name="Label" type="RichTextLabel" parent="Sprite"]
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 144.0
+offset_bottom = 64.0
+theme_override_colors/default_color = Color(0.317647, 0.423529, 0.529412, 1)
+theme_override_colors/font_selected_color = Color(0.419608, 0.552941, 0.345098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 28
+theme_override_fonts/normal_font = ExtResource("3_a5kb3")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "W"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite2" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(2, -15)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_o5ikt")
+
+[node name="Label" type="RichTextLabel" parent="Sprite2"]
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 144.0
+offset_bottom = 64.0
+theme_override_colors/default_color = Color(0.317647, 0.423529, 0.529412, 1)
+theme_override_colors/font_selected_color = Color(0.419608, 0.552941, 0.345098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 28
+theme_override_fonts/normal_font = ExtResource("3_a5kb3")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "W"
+metadata/_edit_use_anchors_ = true
+
+[node name="Sprite3" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(38, 22)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_o5ikt")
+
+[node name="Label" type="RichTextLabel" parent="Sprite3"]
+offset_left = -8.0
+offset_top = -36.0
+offset_right = 144.0
+offset_bottom = 64.0
+theme_override_colors/default_color = Color(0.317647, 0.423529, 0.529412, 1)
+theme_override_colors/font_selected_color = Color(0.419608, 0.552941, 0.345098, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 28
+theme_override_fonts/normal_font = ExtResource("3_a5kb3")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "W"
+metadata/_edit_use_anchors_ = true
