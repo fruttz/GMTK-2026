@@ -5,11 +5,11 @@ var depth_tier :int = 1
 var maxdepth = 720 + 100 #ini calon konflik lol, defer ke gw
 var mindepth = 100
 var oxygen_tier: int = 1
-var oxygen: float = 30
-var oxygen_max: float = 30
-var oxygen_increment: int = 30
+var oxygen: float = 20
+var oxygen_max: int = 20
+var oxygen_increment: int = 20
 var upgrade_increment = 0
-var score = 20
+var score = 10
 var offset_score = 0
 
 var letter_array : Array[String] = []
@@ -40,13 +40,13 @@ func _unhandled_input(event: InputEvent) -> void:
 			main_upgrade()
 			upgrade_increment += 1
 			if upgrade_increment == 1: 
-				score = 40 - offset_score
+				score = 20 - offset_score
 				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
 			elif upgrade_increment == 2:
-				score = 60 - offset_score
+				score = 30 - offset_score
 				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
 			elif upgrade_increment == 3:
-				score = 80 - offset_score
+				score = 40 - offset_score
 				$UILayer/Score.text = "Letters to Victory: " + str(score)
 			elif upgrade_increment == 4:
 				upgrade_increment = 0
@@ -58,6 +58,8 @@ func _unhandled_input(event: InputEvent) -> void:
 		submarine_died()
 	if event.is_action_pressed("suffocate_key"):
 		oxygen = 1
+	if event.is_action_pressed("money_key"):
+		$Inventory.set_score(score+1)
 		
 func submarine_died():
 #Reset Inventory dan respawn submarinenya
@@ -72,7 +74,7 @@ func main_upgrade():
 	if oxygen_tier < 3:
 		oxygen_tier += 1
 		oxygen_max += oxygen_increment
-	
+		$UILayer/Gauge/MaxLabel.text= str(oxygen_max)
 	
 func _physics_process(delta: float) -> void:
 	#Horizontal Sub Capping
@@ -102,7 +104,7 @@ func _physics_process(delta: float) -> void:
 		oxygen-=delta
 	if oxygen < 0:
 		submarine_died()
-	$UILayer/OxygenBar.value = 100.0*oxygen/oxygen_max
+	$UILayer/Gauge/Needle.rotation = deg_to_rad( -120 + 240*oxygen/oxygen_max)
 	
 	##Vertical Scrolling
 	#if $Submarine.position.y > $BottomRight.position.y:
@@ -159,7 +161,7 @@ func  _input(event: InputEvent) -> void:
 			$Inventory.setup(letter_array)
 	  
 func mission1_upgrade():
-	print("mission1 upgrade")
+	#print("mission1 upgrade")
 	$Submarine.speed_tier += 1
 	$UILayer/Mission/Mission1.text = "- [s]Spell a word at least 7 letter long[/s]"
 	$UILayer/UpgradePanel.visible = true
@@ -170,7 +172,7 @@ func mission1_upgrade():
 
 
 func mission2_upgrade():
-	print("mission2 upgrade")
+	#print("mission2 upgrade")
 	$Submarine.omega_speed_tier += 1
 	$UILayer/Mission/Mission2.text = "- [s]Spell a word with adjacent double letters[/s]"
 	$UILayer/UpgradePanel.visible = true
@@ -180,7 +182,7 @@ func mission2_upgrade():
 	$UILayer/UpgradePanel/Rot_Speed.visible = false
 
 func mission3_upgrade():
-	print("mission3 upgrade")
+	#print("mission3 upgrade")
 	$Submarine.harpoon_range_tier += 1
 	$UILayer/Mission/Mission3.text = "- [s]Spell a word starting with J,X,Q or Z[/s]"
 	$UILayer/UpgradePanel.visible = true
@@ -198,14 +200,10 @@ func store(fish):
 		fish_array.erase(fish)
 		fish.queue_free()
 	else:
-		print("andies stored")
-		print(fish.andy_letters)
 		letter_array += (fish.andy_letters)
 		type_array += (fish.andy_types)
 		fish_array.erase(fish)
 		fish.queue_free()
-	print(letter_array)
-	print(type_array)
 	
 	
 func ready():

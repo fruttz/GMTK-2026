@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dvremc0nn1417" path="res://Scripts/letterfish.gd" id="1_nx4fh"]
 [ext_resource type="Texture2D" uid="uid://bffqkjh7ux2y3" path="res://Sprites/Fish Regular/LettaLetta.png" id="2_lx7ol"]
-[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="3_ppyht"]
+[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Some Time Later.otf" id="3_ppyht"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bend1"]
 size = Vector2(71, 137)

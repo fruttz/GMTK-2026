@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://md4l1w1j80jf" path="res://Scenes/letters.gd" id="1_ur7m0"]
 [ext_resource type="Texture2D" uid="uid://6oqf4voc6rej" path="res://Sprites/Letter_Tiles.webp" id="2_wbqax"]
-[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="3_228xi"]
+[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Some Time Later.otf" id="3_228xi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7m0"]
 size = Vector2(97, 97)

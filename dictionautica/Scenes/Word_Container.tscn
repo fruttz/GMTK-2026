@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://dmjux6epf3233"]
+[gd_scene load_steps=4 format=3 uid="uid://dmjux6epf3233"]
 
 [ext_resource type="Script" uid="uid://bk03ibanpbxjg" path="res://Scenes/w_container.gd" id="1_vba0b"]
+[ext_resource type="Theme" uid="uid://dqajn6xkpms6b" path="res://Sans-Serif.tres" id="2_7727n"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_714gh"]
 size = Vector2(1242, 235)
@@ -26,6 +27,7 @@ offset_left = -79.0
 offset_top = 103.0
 offset_right = -1.0
 offset_bottom = 134.0
+theme = ExtResource("2_7727n")
 text = "Submit"
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cqur5s45ra5pu"]
 
 [ext_resource type="Script" uid="uid://b4eoiieqqwv7j" path="res://Scripts/suffish.gd" id="1_vwpmw"]
-[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Sprites/Some Time Later.otf" id="2_4rf32"]
+[ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Some Time Later.otf" id="2_4rf32"]
 [ext_resource type="Texture2D" uid="uid://t320qm2cmmqn" path="res://Sprites/Fish Regular/Suffish.png" id="3_vwpmw"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vwpmw"]

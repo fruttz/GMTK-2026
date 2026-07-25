@@ -1,16 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1dnrhw4mr4tc"]
+[gd_scene load_steps=6 format=3 uid="uid://b1dnrhw4mr4tc"]
 
 [ext_resource type="Script" uid="uid://b66rk8cx6ryfj" path="res://Scenes/inventory.gd" id="1_ersrd"]
 [ext_resource type="Texture2D" uid="uid://dhvbxldb5mr55" path="res://Sprites/aquarium_mockup_border.png" id="2_1pi3o"]
 [ext_resource type="PackedScene" uid="uid://dmjux6epf3233" path="res://Scenes/Word_Container.tscn" id="2_jbd0o"]
 [ext_resource type="Script" uid="uid://bo6e7qvht7kqv" path="res://Scenes/l_container.gd" id="3_4v8qb"]
+[ext_resource type="Theme" uid="uid://dqajn6xkpms6b" path="res://Sans-Serif.tres" id="5_2hjaa"]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_ersrd")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(642, 360)
-scale = Vector2(0.400625, 0.401111)
+scale = Vector2(1.175, 1.175)
 texture = ExtResource("2_1pi3o")
 
 [node name="Letter_Panel" type="Panel" parent="."]
@@ -26,11 +27,20 @@ script = ExtResource("3_4v8qb")
 [node name="Word_Container" parent="." instance=ExtResource("2_jbd0o")]
 position = Vector2(616, 142)
 
+[node name="Submit" parent="Word_Container" index="2"]
+offset_left = -50.0
+offset_top = 90.0
+offset_right = 50.0
+offset_bottom = 130.0
+
 [node name="Exit" type="Button" parent="."]
-offset_left = 623.0
-offset_top = 246.0
-offset_right = 699.0
-offset_bottom = 277.0
+offset_left = 1171.0
+offset_top = 276.0
+offset_right = 1271.0
+offset_bottom = 316.0
+theme = ExtResource("5_2hjaa")
 text = "Exit"
 
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
+
+[editable path="Word_Container"]
