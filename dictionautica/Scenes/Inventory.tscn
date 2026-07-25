@@ -17,14 +17,14 @@ offset_right = 683.0
 offset_bottom = 247.0
 text = "Exit"
 
-[node name="Letter_Panel" type="Panel" parent="."]
-offset_left = 2.0
-offset_top = 245.0
-offset_right = 1151.0
-offset_bottom = 656.0
-
 [node name="Letter_Container" type="Node2D" parent="."]
 position = Vector2(0, 1)
 script = ExtResource("3_4v8qb")
+
+[node name="Letter_Panel" type="Panel" parent="Letter_Container"]
+offset_left = 2.0
+offset_top = 244.0
+offset_right = 1151.0
+offset_bottom = 655.0
 
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]

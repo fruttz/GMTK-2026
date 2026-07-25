@@ -61,6 +61,49 @@ offset_right = 261.0
 offset_bottom = -211.0
 metadata/_edit_use_anchors_ = true
 
+[node name="Score" type="RichTextLabel" parent="UILayer"]
+offset_left = 28.0
+offset_top = -268.0
+offset_right = 222.0
+offset_bottom = -241.0
+text = "Letters to Upgrade: 20"
+
+[node name="Mission" type="RichTextLabel" parent="UILayer"]
+offset_left = 21.0
+offset_top = -204.0
+offset_right = 597.0
+offset_bottom = -93.0
+bbcode_enabled = true
+text = "Optional Sidequest:
+"
+
+[node name="Mission1" type="RichTextLabel" parent="UILayer/Mission"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 21.0
+offset_right = 294.0
+offset_bottom = 50.0
+bbcode_enabled = true
+text = "- Spell a word at least 7 letter long"
+
+[node name="Mission2" type="RichTextLabel" parent="UILayer/Mission"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 41.0
+offset_right = 346.0
+offset_bottom = 70.0
+bbcode_enabled = true
+text = "- Spell a word with adjacent double letters"
+
+[node name="Mission3" type="RichTextLabel" parent="UILayer/Mission"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 61.0
+offset_right = 346.0
+offset_bottom = 90.0
+bbcode_enabled = true
+text = "- Spell a word starting with J,X,Q or Z"
+
 [node name="Inventory" parent="." instance=ExtResource("4_lkrc6")]
 process_mode = 3
 visible = false

@@ -8,6 +8,9 @@ var oxygen_tier: int = 1
 var oxygen: float = 30
 var oxygen_max: float = 30
 var oxygen_increment: int = 30
+var upgrade_increment = 0
+var score = 20
+var offset_score = 0
 
 var letter_array : Array[String] = []
 var type_array : Array[int] = []
@@ -23,10 +26,32 @@ var Mola = preload("res://Scenes/Mola.tscn")
 
 signal oxygen_refilled
 
+func _ready() -> void:
+	$Inventory.connect("mission1_upgrade", Callable(self, "mission1_upgrade"))
+	$Inventory.connect("mission2_upgrade", Callable(self, "mission2_upgrade"))
+	$Inventory.connect("mission3_upgrade", Callable(self, "mission3_upgrade"))
+
 #remove keynya di build final, these are debug buttons
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_key"):
-		main_upgrade()
+		if score == 0:
+			main_upgrade()
+			upgrade_increment += 1
+			if upgrade_increment == 1: 
+				score = 40 - offset_score
+				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
+			elif upgrade_increment == 2:
+				score = 60 - offset_score
+				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
+			elif upgrade_increment == 3:
+				score = 80 - offset_score
+				$UILayer/Score.text = "Letters to Victory: " + str(score)
+			elif upgrade_increment == 4:
+				upgrade_increment = 0
+				score = 20
+				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
+			offset_score = 0
+			oxygen = oxygen_max
 	if event.is_action_pressed("suicide_key"):
 		submarine_died()
 	if event.is_action_pressed("suffocate_key"):
@@ -34,8 +59,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func submarine_died():
 #Reset Inventory dan respawn submarinenya
-	var letter_array  = []
-	var type_array = []
+	letter_array.clear()
 	$Submarine.die()
 	print("you dieded")
 #note to self: kasih juice lah biar mati kerasa kaya mati
@@ -47,6 +71,7 @@ func main_upgrade():
 	if oxygen_tier < 3:
 		oxygen_tier += 1
 		oxygen_max += oxygen_increment
+	
 	
 func _physics_process(delta: float) -> void:
 	#Horizontal Sub Capping
@@ -72,7 +97,7 @@ func _physics_process(delta: float) -> void:
 		$Submarine/Camera2D.position.y = 0
 	
 	#Oxygen Depletion
-	if not surfacing:
+	if not surfacing and $Inventory.visible == false:
 		oxygen-=delta
 	if oxygen < 0:
 		submarine_died()
@@ -112,16 +137,25 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Inventory_Button.disabled = true
 	
+	if score <= 0 and upgrade_increment < 3:
+		score = 0
+		$UILayer/Score.text = "Press 'U' to Upgrade!"
+	elif score <= 0 and upgrade_increment >= 3:
+		score = 0
+		$UILayer/Score.text = "Press 'U' to Win!"
+	
 func  _input(event: InputEvent) -> void:
 	if event.is_action_pressed("spelling_game"):
 		if $Inventory.visible == true:
 			$Inventory.visible = false
 			$Submarine/Camera2D.make_current()
+			oxygen = oxygen_max
 		elif surfacing:
 			$Inventory.visible = true
 			$Inventory/Camera2D.make_current()
 			$Inventory.setup(letter_array)
 			letter_array.clear()
+			
 
 func store(fish):
 	#function untuk nyetor data ikan
@@ -129,6 +163,21 @@ func store(fish):
 	type_array.append(fish.type)
 	fish_array.erase(fish)
 	fish.queue_free()
+
+func mission1_upgrade():
+	print("mission1 upgrade")
+	$Submarine.speed_tier += 1
+	$UILayer/Mission/Mission1.text = "- [s]Spell a word at least 7 letter long[/s]"
+
+func mission2_upgrade():
+	print("mission2 upgrade")
+	$Submarine.omega_speed_tier += 1
+	$UILayer/Mission/Mission2.text = "- [s]Spell a word with adjacent double letters[/s]"
+
+func mission3_upgrade():
+	print("mission3 upgrade")
+	$Submarine.arm_range_tier += 1
+	$UILayer/Mission/Mission3.text = "- [s]Spell a word starting with J,X,Q or Z[/s]"
 
 func ready():
 	spawn($Spawner1, 1)

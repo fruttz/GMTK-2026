@@ -12,8 +12,8 @@ func setup(possible_letters):
 	var rng = RandomNumberGenerator.new()
 	var pos : Vector2
 	for l in possible_letters:
-		var x = rng.randf_range($"../Letter_Panel".position.x + 64, $"../Letter_Panel".size.x - 64)
-		var y = rng.randf_range($"../Letter_Panel".position.y + 64, $"../Letter_Panel".size.y - 64)
+		var x = rng.randf_range($Letter_Panel.position.x + 64, $Letter_Panel.size.x - 64)
+		var y = rng.randf_range($Letter_Panel.position.y + 64, $Letter_Panel.size.y - 64)
 		pos.x = x
 		pos.y = y
 		add_letters(l, pos)
