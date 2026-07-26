@@ -29,3 +29,6 @@ func _on_exit_button_down() -> void:
 	$"..".oxygen = $"..".oxygen_max
 	$"..".letter_array.clear()
 	clear_letters()
+	#maap dit gw nambahin UI code di sini spaghetti jam
+	get_parent().show_gauge()
+	

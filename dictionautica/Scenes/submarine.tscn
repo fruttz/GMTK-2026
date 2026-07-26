@@ -1,10 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://wjvnqaoktxl8"]
+[gd_scene load_steps=12 format=3 uid="uid://wjvnqaoktxl8"]
 
 [ext_resource type="Script" uid="uid://b5w8icjecpl1b" path="res://Scripts/submarine.gd" id="2_74qfh"]
+[ext_resource type="Texture2D" uid="uid://d2ql3mxpe3o10" path="res://Sprites/Reference Death.png" id="2_a07w3"]
+[ext_resource type="Theme" uid="uid://dqajn6xkpms6b" path="res://Sans-Serif.tres" id="2_s8co7"]
 [ext_resource type="Texture2D" uid="uid://bb0l0s4t5d2fk" path="res://Sprites/Submarine/Subs Full-Tank.png" id="2_tq48s"]
 [ext_resource type="Texture2D" uid="uid://b34roaa4lxyk8" path="res://Sprites/Submarine/Hand Chain.png" id="4_s8co7"]
 [ext_resource type="Texture2D" uid="uid://cjkpg5ngegipj" path="res://Sprites/Submarine/Hand Guard.png" id="5_wqqa5"]
 [ext_resource type="Texture2D" uid="uid://bypargw7pgivn" path="res://Sprites/Submarine/Hand Claw.png" id="6_45lfp"]
+[ext_resource type="Texture2D" uid="uid://o1g65s6dktx2" path="res://Sprites/Submarine/Subs Empty Tank.png" id="7_wqqa5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_je60v"]
 radius = 60.0
@@ -13,13 +16,37 @@ height = 272.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_ue3ij"]
 radius = 56.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s8co7"]
+bg_color = Color(0.85098, 0.784314, 0.192157, 0.784314)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="Submarine" type="Node2D"]
 script = ExtResource("2_74qfh")
 
 [node name="SubRotator" type="Node2D" parent="."]
 
-[node name="SubmarineSprite" type="Sprite2D" parent="SubRotator"]
+[node name="DeadSprite" type="Sprite2D" parent="SubRotator"]
+visible = false
+rotation = 3.14159
+scale = Vector2(0.25, 0.245624)
+texture = ExtResource("2_a07w3")
+
+[node name="SubmarineSprite" type="Node2D" parent="SubRotator"]
 scale = Vector2(0.25, 0.25)
+
+[node name="EmptyTank" type="Sprite2D" parent="SubRotator/SubmarineSprite"]
+texture = ExtResource("7_wqqa5")
+flip_h = true
+
+[node name="FullTank" type="Sprite2D" parent="SubRotator/SubmarineSprite"]
 texture = ExtResource("2_tq48s")
 flip_h = true
 
@@ -52,6 +79,26 @@ shape = SubResource("CapsuleShape2D_je60v")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DoorArea"]
 position = Vector2(3, -5)
 shape = SubResource("CircleShape2D_ue3ij")
+
+[node name="DeadPanel" type="Panel" parent="."]
+visible = false
+offset_left = 20.0
+offset_top = -100.0
+offset_right = 220.0
+mouse_filter = 2
+theme = ExtResource("2_s8co7")
+theme_override_styles/panel = SubResource("StyleBoxFlat_s8co7")
+
+[node name="Label" type="Label" parent="DeadPanel"]
+layout_mode = 0
+offset_left = 25.0
+offset_top = 20.0
+offset_right = 181.0
+offset_bottom = 77.0
+scale = Vector2(1.0139, 1.02378)
+text = "Out of O2!
+Wait for respawn..."
+horizontal_alignment = 1
 
 [connection signal="body_shape_entered" from="SubRotator/Harpoon/Area" to="." method="_on_harpoon_body_entered"]
 [connection signal="body_shape_entered" from="DoorArea" to="." method="_on_door_body_entered"]

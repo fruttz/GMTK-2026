@@ -32,8 +32,13 @@ func _ready() -> void:
 	$Inventory.connect("mission1_upgrade", Callable(self, "mission1_upgrade"))
 	$Inventory.connect("mission2_upgrade", Callable(self, "mission2_upgrade"))
 	$Inventory.connect("mission3_upgrade", Callable(self, "mission3_upgrade"))
+	despawn_tutorial()
 
-#remove keynya di build final, these are debug buttons
+func despawn_tutorial():
+	await get_tree().create_timer(5.0).timeout
+	$Sea/Tutorial.visible = false
+	
+#remove keynya di build final, some of these are debug buttons
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_key"):
 		if score == 0:
@@ -64,6 +69,7 @@ func _unhandled_input(event: InputEvent) -> void:
 func submarine_died():
 #Reset Inventory dan respawn submarinenya
 	letter_array.clear()
+	type_array.clear()
 	$Submarine.die()
 #note to self: kasih juice lah biar mati kerasa kaya mati
 
@@ -100,11 +106,18 @@ func _physics_process(delta: float) -> void:
 		$Submarine/Camera2D.position.y = 0
 	
 	#Oxygen Depletion
-	if not surfacing and $Inventory.visible == false:
-		oxygen-=delta
+	if not surfacing and $Inventory.visible == false and $Submarine.alive:
+		oxygen -= delta
 	if oxygen < 0:
-		submarine_died()
-	$UILayer/Gauge/Needle.rotation = deg_to_rad( -120 + 240*oxygen/oxygen_max)
+		oxygen = 0.0
+		if $Submarine.alive:
+			submarine_died()
+	#if oxygen/oxygen_max < 0.25:
+		#$Submarine.low()
+	#else:
+		#$Submarine.high()
+	$Submarine.tank_masking(oxygen/oxygen_max)
+	$UILayer/Gauge/Needle.rotation = deg_to_rad(-120 + 240*oxygen/oxygen_max)
 	
 	##Vertical Scrolling
 	#if $Submarine.position.y > $BottomRight.position.y:
@@ -135,7 +148,7 @@ func _physics_process(delta: float) -> void:
 		if fish.position.y < $Sea.position.y + 200:
 			fish.position.y = $Sea.position.y + 200
 	
-	if surfacing:
+	if surfacing and $Submarine.alive:
 		$Inventory_Button.disabled = false
 	else:
 		$Inventory_Button.disabled = true
@@ -155,11 +168,25 @@ func  _input(event: InputEvent) -> void:
 			oxygen = oxygen_max
 			letter_array.clear()
 			$Inventory.clear_letters()
+			show_gauge()
 		elif surfacing:
 			$Inventory.visible = true
 			$Inventory/Camera2D.make_current()
 			$Inventory.setup(letter_array)
-	  
+			hide_gauge()
+	if event.is_action_pressed("toggle_mission"):
+		toggle_mission()
+
+func toggle_mission():
+	if $UILayer/Mission.visible:
+		$UILayer/Mission.visible = false
+		#$UILayer/Prompt.visible = true
+		$UILayer/BGPanel.size.y = 50
+	else:
+		$UILayer/Mission.visible = true
+		#$UILayer/Prompt.visible = false
+		$UILayer/BGPanel.size.y = 216
+ 
 func mission1_upgrade():
 	#print("mission1 upgrade")
 	$Submarine.speed_tier += 1
@@ -248,3 +275,9 @@ func _on_inventory_button_button_down() -> void:
 	$Inventory/Camera2D.make_current()
 	$Inventory.setup(letter_array)
 	letter_array.clear()
+	hide_gauge()
+	
+func hide_gauge():
+	$UILayer/Gauge.visible = false
+func show_gauge():
+	$UILayer/Gauge.visible = true
