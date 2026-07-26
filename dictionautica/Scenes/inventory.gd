@@ -36,4 +36,6 @@ func _on_exit_button_down() -> void:
 	get_parent().get_node("Submarine/Camera2D").make_current()
 	$"..".oxygen = $"..".oxygen_max
 	$"..".letter_array.clear()
+	#maap dit gw nambahin UI code di sini spaghetti jam
+	get_parent().show_gauge()
 	
