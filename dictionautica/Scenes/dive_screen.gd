@@ -41,7 +41,7 @@ func despawn_tutorial():
 func show_victory():
 	$UILayer/Victory.visible = true
 	await get_tree().create_timer(5.0).timeout
-	$Victory/Tutorial.visible = false
+	$UILayer/Victory.visible = false
 	
 #remove keynya di build final, some of these are debug buttons
 func _unhandled_input(event: InputEvent) -> void:
@@ -163,7 +163,8 @@ func _physics_process(delta: float) -> void:
 		score = 0
 		$UILayer/Score.text = "Press 'U' for Victory!"
 	elif score <= 0 and upgrade_increment >= 3:
-		score = 0
+		#score = 0
+		pass
 	
 func  _input(event: InputEvent) -> void:
 	if event.is_action_pressed("spelling_game"):
