@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://ds4lscqdevswl"]
+
+[ext_resource type="Script" uid="uid://8wotgsjegkl6" path="res://Scenes/decorfish.gd" id="1_ypbm5"]
+
+[node name="Decorfish" type="Node2D"]
+modulate = Color(0.141176, 0.141176, 0.141176, 0.392157)
+script = ExtResource("1_ypbm5")

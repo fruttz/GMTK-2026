@@ -68,6 +68,7 @@ func _on_harpoon_body_entered(body_rid: RID, body: Node2D, body_shape_index: int
 func _on_door_body_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
 	if stashing:
 		get_parent().store(body.get_parent())
+		$Audio.play()
 
 func die():
 	stashing = false
@@ -103,8 +104,6 @@ func high():
 	pass
 func tank_masking(my_float):
 	$SubRotator/SubmarineSprite/FullTank.self_modulate.a = sqrt(my_float)
-	print("masking")
-	print(my_float)
 	
 #func _input(event: InputEvent) -> void:
 	##Character Event Inputs

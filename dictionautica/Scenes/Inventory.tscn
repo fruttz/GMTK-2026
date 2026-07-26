@@ -1,18 +1,20 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1dnrhw4mr4tc"]
+[gd_scene load_steps=8 format=3 uid="uid://b1dnrhw4mr4tc"]
 
 [ext_resource type="Script" uid="uid://b66rk8cx6ryfj" path="res://Scenes/inventory.gd" id="1_ersrd"]
-[ext_resource type="Texture2D" uid="uid://dhvbxldb5mr55" path="res://Sprites/aquarium_mockup_border.png" id="2_1pi3o"]
+[ext_resource type="Texture2D" uid="uid://do8khkolp5shn" path="res://Sprites/Aquarium/aquarium_border_full.png" id="2_2hjaa"]
 [ext_resource type="PackedScene" uid="uid://dmjux6epf3233" path="res://Scenes/Word_Container.tscn" id="2_jbd0o"]
 [ext_resource type="Script" uid="uid://bo6e7qvht7kqv" path="res://Scenes/l_container.gd" id="3_4v8qb"]
+[ext_resource type="Texture2D" uid="uid://p6tf5v7gsf35" path="res://Sprites/Aquarium/aquarium_border.png" id="4_f1uin"]
 [ext_resource type="Theme" uid="uid://dqajn6xkpms6b" path="res://Sans-Serif.tres" id="5_2hjaa"]
+[ext_resource type="Texture2D" uid="uid://ovr4ct78igrt" path="res://Sprites/Aquarium/glow_bottom.png" id="7_4ne0y"]
 
 [node name="Inventory" type="Node2D"]
 script = ExtResource("1_ersrd")
 
 [node name="BG" type="Sprite2D" parent="."]
 position = Vector2(642, 360)
-scale = Vector2(1.175, 1.175)
-texture = ExtResource("2_1pi3o")
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_2hjaa")
 
 [node name="Letter_Panel" type="Panel" parent="."]
 visible = false
@@ -23,6 +25,11 @@ offset_bottom = 723.0
 
 [node name="Letter_Container" type="Node2D" parent="."]
 script = ExtResource("3_4v8qb")
+
+[node name="Border" type="Sprite2D" parent="."]
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("4_f1uin")
+centered = false
 
 [node name="Word_Container" parent="." instance=ExtResource("2_jbd0o")]
 position = Vector2(616, 142)
@@ -40,6 +47,12 @@ offset_right = 1271.0
 offset_bottom = 316.0
 theme = ExtResource("5_2hjaa")
 text = "Exit"
+
+[node name="Glow" type="Sprite2D" parent="."]
+self_modulate = Color(1, 1, 1, 0.470588)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("7_4ne0y")
+centered = false
 
 [connection signal="button_down" from="Exit" to="." method="_on_exit_button_down"]
 

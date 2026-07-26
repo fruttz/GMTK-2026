@@ -18,9 +18,9 @@ func init(l : String, type: String):
 		$Sprite.texture = load("res://Sprites/Game Jam/Fish Regular/Suffish.png")
 		$Sprite/Letter.self_modulate = Color.from_rgba8(181, 73, 77)
 	if type == "andies":
-		$Sprite.texture = load("res://Sprites/Letter_Tiles.webp")
-		$Sprite.scale = $Sprite.scale * 3
+		$Sprite.texture = load("res://Sprites/AndyLetter.png")
 		$Sprite/Letter.self_modulate = Color.from_rgba8(47, 127, 153)
+		$Sprite/Letter.position.y -= 50
 
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:

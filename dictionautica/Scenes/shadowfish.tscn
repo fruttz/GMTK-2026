@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://c7yqcs3a8j61l"]
+
+[ext_resource type="Texture2D" uid="uid://plh48onpva42" path="res://Sprites/Fish Shiny/Shiny LettaLetta.png" id="1_3q05k"]
+[ext_resource type="Script" uid="uid://bqe1gute8qd11" path="res://Scenes/shadowfish.gd" id="2_20byw"]
+
+[node name="Shadowfish" type="Sprite2D"]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("1_3q05k")
+script = ExtResource("2_20byw")

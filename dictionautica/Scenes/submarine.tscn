@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://wjvnqaoktxl8"]
+[gd_scene load_steps=13 format=3 uid="uid://wjvnqaoktxl8"]
 
 [ext_resource type="Script" uid="uid://b5w8icjecpl1b" path="res://Scripts/submarine.gd" id="2_74qfh"]
 [ext_resource type="Texture2D" uid="uid://d2ql3mxpe3o10" path="res://Sprites/Reference Death.png" id="2_a07w3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://cjkpg5ngegipj" path="res://Sprites/Submarine/Hand Guard.png" id="5_wqqa5"]
 [ext_resource type="Texture2D" uid="uid://bypargw7pgivn" path="res://Sprites/Submarine/Hand Claw.png" id="6_45lfp"]
 [ext_resource type="Texture2D" uid="uid://o1g65s6dktx2" path="res://Sprites/Submarine/Subs Empty Tank.png" id="7_wqqa5"]
+[ext_resource type="AudioStream" uid="uid://056rswxim8wb" path="res://Sounds/boop.ogg" id="9_45lfp"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_je60v"]
 radius = 60.0
@@ -99,6 +100,10 @@ scale = Vector2(1.0139, 1.02378)
 text = "Out of O2!
 Wait for respawn..."
 horizontal_alignment = 1
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_45lfp")
+volume_db = 20.0
 
 [connection signal="body_shape_entered" from="SubRotator/Harpoon/Area" to="." method="_on_harpoon_body_entered"]
 [connection signal="body_shape_entered" from="DoorArea" to="." method="_on_door_body_entered"]

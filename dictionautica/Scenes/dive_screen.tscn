@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3jaacl8mtpby"]
+[gd_scene load_steps=13 format=3 uid="uid://b3jaacl8mtpby"]
 
 [ext_resource type="PackedScene" uid="uid://wjvnqaoktxl8" path="res://Scenes/submarine.tscn" id="1_5f54t"]
 [ext_resource type="Texture2D" uid="uid://c7twqmtjujbf1" path="res://Sprites/Placeholder_Sea.png" id="1_hq367"]
 [ext_resource type="Script" uid="uid://db12vk1sdxnos" path="res://Scenes/dive_screen.gd" id="1_lkrc6"]
-[ext_resource type="PackedScene" uid="uid://b1dnrhw4mr4tc" path="res://Scenes/Inventory.tscn" id="4_lkrc6"]
+[ext_resource type="Texture2D" uid="uid://c221iwlsj8ns8" path="res://Sprites/SeiunSky.png" id="3_tm5p4"]
 [ext_resource type="AudioStream" uid="uid://bsks0mfb0wv4h" path="res://Sounds/Theme.ogg" id="4_hencq"]
+[ext_resource type="PackedScene" uid="uid://b1dnrhw4mr4tc" path="res://Scenes/Inventory.tscn" id="4_lkrc6"]
 [ext_resource type="Texture2D" uid="uid://0woe15g2s4vw" path="res://Sprites/Gauge.png" id="5_ju3w4"]
 [ext_resource type="Theme" uid="uid://dqajn6xkpms6b" path="res://Sans-Serif.tres" id="5_xxky2"]
 [ext_resource type="Texture2D" uid="uid://dsmu1madva22d" path="res://Sprites/Needle.png" id="6_0o8bi"]
 [ext_resource type="Theme" uid="uid://gcglmy6f5qcw" path="res://Dictionautica.tres" id="6_xxky2"]
 [ext_resource type="FontFile" uid="uid://cm5asjsieu6ji" path="res://SNPro.ttf" id="7_0o8bi"]
+[ext_resource type="PackedScene" uid="uid://ds4lscqdevswl" path="res://Scenes/decorfish.tscn" id="12_sssax"]
 
 [node name="DiveScreen" type="Node2D"]
 script = ExtResource("1_lkrc6")
@@ -20,9 +22,9 @@ position = Vector2(1, 100)
 texture = ExtResource("1_hq367")
 centered = false
 
-[node name="placeholder sky" type="ColorRect" parent="Sea"]
-offset_top = -720.0
-offset_right = 1280.0
+[node name="sky" type="Sprite2D" parent="Sea"]
+position = Vector2(640, -360)
+texture = ExtResource("3_tm5p4")
 
 [node name="Despawner" type="Node2D" parent="Sea"]
 position = Vector2(1520, 0)
@@ -45,14 +47,17 @@ position = Vector2(1280, 2160)
 offset_right = 40.0
 offset_bottom = 23.0
 theme = ExtResource("6_xxky2")
-text = "★ Press WASD to move
-★ Left and Right arrows to rotate submarine
-★ Hold Space to extend arm, release to pull in
-★ Tab to toggle optional missions
-★ Catch fish for letters
-★ Resurface to spell
-★ Upgrade for more O2 and depth
-★ Don't run out of O2!"
+text = "- Press WASD to move
+- Left and Right arrows to rotate submarine
+- Hold Space to extend arm, release to pull in
+- Tab to toggle optional missions
+- Catch fish for letters
+- Resurface to spell
+- Upgrade for more O2 and depth
+- Don't run out of O2!"
+
+[node name="Decorfish" parent="." instance=ExtResource("12_sssax")]
+z_index = -2
 
 [node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
 position = Vector2(640, 100)
@@ -87,6 +92,14 @@ parameters/looping = true
 position = Vector2(1168, -208)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("5_ju3w4")
+
+[node name="Panel" type="Panel" parent="UILayer/Gauge"]
+z_index = -2
+offset_left = -237.0
+offset_top = -240.0
+offset_right = 250.0
+offset_bottom = 250.0
+theme = ExtResource("5_xxky2")
 
 [node name="Needle" type="Sprite2D" parent="UILayer/Gauge"]
 modulate = Color(0, 0, 0, 1)
@@ -199,6 +212,29 @@ text = "CLAW RANGE  INCREASED"
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="Victory" type="Panel" parent="UILayer"]
+visible = false
+offset_left = 327.0
+offset_top = -150.0
+offset_right = 927.0
+offset_bottom = 150.0
+mouse_filter = 2
+theme = ExtResource("5_xxky2")
+
+[node name="Victory_Text" type="Label" parent="UILayer/Victory"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 45.0
+offset_right = 583.0
+offset_bottom = 261.0
+theme = ExtResource("6_xxky2")
+theme_override_font_sizes/font_size = 70
+text = "You Finished!
+Thanks for Playing!
+Hope you had fun!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="Inventory" parent="." instance=ExtResource("4_lkrc6")]
 process_mode = 3
 visible = false
@@ -213,6 +249,6 @@ offset_top = -244.0
 offset_right = 719.0
 offset_bottom = -188.0
 theme = ExtResource("6_xxky2")
-text = "Spelling Room"
+text = "Spelling Room (E)"
 
 [connection signal="button_down" from="Inventory_Button" to="." method="_on_inventory_button_button_down"]

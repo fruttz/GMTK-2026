@@ -38,6 +38,11 @@ func despawn_tutorial():
 	await get_tree().create_timer(5.0).timeout
 	$Sea/Tutorial.visible = false
 	
+func show_victory():
+	$UILayer/Victory.visible = true
+	await get_tree().create_timer(5.0).timeout
+	$Victory/Tutorial.visible = false
+	
 #remove keynya di build final, some of these are debug buttons
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("upgrade_key"):
@@ -54,17 +59,18 @@ func _unhandled_input(event: InputEvent) -> void:
 				score = 40 - offset_score
 				$UILayer/Score.text = "Letters to Victory: " + str(score)
 			elif upgrade_increment == 4:
-				upgrade_increment = 0
-				score = 20
-				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
+				upgrade_increment == 5
+				score = 0
+				$UILayer/Score.text = "You won! Endless Score: " + str(-score)
+				show_victory()
 			offset_score = 0
 			oxygen = oxygen_max
-	if event.is_action_pressed("suicide_key"):
-		submarine_died()
-	if event.is_action_pressed("suffocate_key"):
-		oxygen = 1
-	if event.is_action_pressed("money_key"):
-		$Inventory.set_score(score+1)
+	#if event.is_action_pressed("suicide_key"):
+		#submarine_died()
+	#if event.is_action_pressed("suffocate_key"):
+		#oxygen = 1
+	#if event.is_action_pressed("money_key"):
+		#$Inventory.set_score(score+1)
 		
 func submarine_died():
 #Reset Inventory dan respawn submarinenya
@@ -158,7 +164,6 @@ func _physics_process(delta: float) -> void:
 		$UILayer/Score.text = "Press 'U' to Upgrade!"
 	elif score <= 0 and upgrade_increment >= 3:
 		score = 0
-		$UILayer/Score.text = "Press 'U' to Win!"
 	
 func  _input(event: InputEvent) -> void:
 	if event.is_action_pressed("spelling_game"):
@@ -196,7 +201,7 @@ func mission1_upgrade():
 	$UILayer/UpgradePanel/Sub_Speed.visible = true
 	await get_tree().create_timer(3).timeout
 	$UILayer/UpgradePanel.visible = false
-	$UILayer/UpgradePanel/Rot_Speed.visible = false
+	$UILayer/UpgradePanel/Sub_Speed.visible = false
 
 
 func mission2_upgrade():
@@ -217,7 +222,7 @@ func mission3_upgrade():
 	$UILayer/UpgradePanel/Arm_Range.visible = true
 	await get_tree().create_timer(3).timeout
 	$UILayer/UpgradePanel.visible = false
-	$UILayer/UpgradePanel/Rot_Speed.visible = false
+	$UILayer/UpgradePanel/Arm_Range.visible = false
 
 
 func store(fish):
