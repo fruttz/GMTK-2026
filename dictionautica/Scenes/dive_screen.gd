@@ -163,11 +163,12 @@ func _physics_process(delta: float) -> void:
 func  _input(event: InputEvent) -> void:
 	if event.is_action_pressed("spelling_game"):
 		if $Inventory.visible == true:
+			$Inventory.clear_letters()
+			await get_tree().create_timer(1).timeout
 			$Inventory.visible = false
 			$Submarine/Camera2D.make_current()
 			oxygen = oxygen_max
 			letter_array.clear()
-			$Inventory.clear_letters()
 			show_gauge()
 		elif surfacing:
 			$Inventory.visible = true
