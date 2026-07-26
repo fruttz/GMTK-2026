@@ -9,7 +9,6 @@ var alive : bool = true
 var caught: bool = false
 var omega: float = 1
 var is_andies : bool = false
-var wait_frame : bool = false
 
 #Andy dan Suffish bakal inherit kelas ini tapi datanya gw ganti, maybe physicsnya
 @export var letter : String = [
@@ -39,6 +38,7 @@ var wait_frame : bool = false
   "X",
   "Y", "Y",
   "Z",
+  "*", "*"
 ].pick_random()
 enum types {LETTA,SUFFISH,ANDY}
 @export var type : int = types.LETTA
@@ -59,16 +59,12 @@ func _physics_process(delta: float) -> void:
 		velocity = velocity/(exp(delta))
 	else:
 		rotation += delta*omega
-		#jam fix buat reposition
-		if not wait_frame:
-			wait_frame = true
-		else:
-			self.position = get_parent().position
+		self.position = get_parent().position
 		#just fucking update its position again bruh
 		
 func catch(catcher_node):
+	caught = true
 	set_global_position(catcher_node.get_node("Area").get_global_position())
 	self.call_deferred("reparent", catcher_node)
-	caught = true
 	
 		

@@ -73,39 +73,12 @@ func die():
 	stashing = false
 	catching = false
 	alive = false
-	$SubRotator/DeadSprite.visible = true
-	$SubRotator/SubmarineSprite.visible = false
-	$SubRotator/HandChain.visible = false
-	$SubRotator/HandGuard.visible = false
-	$SubRotator/Harpoon.visible = false
-	$DeadPanel.visible = true
 	
 func respawn():
-	position.y = 0
-	velocity = Vector2(0,-10)
+	velocity = Vector2(0,0)
 	stashing = true
 	catching = true
 	alive = true
-	$SubRotator/DeadSprite.visible = false
-	$SubRotator/SubmarineSprite.visible = true
-	$SubRotator/HandChain.visible = true
-	$SubRotator/HandGuard.visible = true
-	$SubRotator/Harpoon.visible = true
-	$DeadPanel.visible = false
-	
-func low():
-	#$SubRotator/SubmarineSprite/EmptyTank.visible = true
-	#$SubRotator/SubmarineSprite/FullTank.visible = false
-	pass
-func high():
-	#$SubRotator/SubmarineSprite/EmptyTank.visible = false
-	#$SubRotator/SubmarineSprite/FullTank.visible = true
-	pass
-func tank_masking(my_float):
-	$SubRotator/SubmarineSprite/FullTank.self_modulate.a = sqrt(my_float)
-	print("masking")
-	print(my_float)
-	
 #func _input(event: InputEvent) -> void:
 	##Character Event Inputs
 	#if event.is_action_pressed("launch_harpoon"):

@@ -40,19 +40,6 @@ position = Vector2(-300, 1800)
 [node name="SeaBottomRight" type="Node2D" parent="Sea"]
 position = Vector2(1280, 2160)
 
-[node name="Tutorial" type="Label" parent="Sea"]
-offset_right = 40.0
-offset_bottom = 23.0
-theme = ExtResource("6_xxky2")
-text = "★ Press WASD to move
-★ Left and Right arrows to rotate submarine
-★ Hold Space to extend arm, release to pull in
-★ Tab to toggle optional missions
-★ Catch fish for letters
-★ Resurface to spell
-★ Upgrade for more O2 and depth
-★ Don't run out of O2!"
-
 [node name="Submarine" parent="." instance=ExtResource("1_5f54t")]
 position = Vector2(640, 100)
 
@@ -77,10 +64,7 @@ offset = Vector2(0, 300)
 transform = Transform2D(1, 0, 0, 1, 0, 300)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer"]
-stream = ExtResource("4_hencq")
-volume_db = -30.0
 autoplay = true
-parameters/looping = true
 
 [node name="Gauge" type="Sprite2D" parent="UILayer"]
 position = Vector2(1168, -208)
@@ -104,13 +88,6 @@ theme_override_fonts/font = ExtResource("7_0o8bi")
 theme_override_font_sizes/font_size = 50
 text = "20"
 
-[node name="BGPanel" type="Panel" parent="UILayer"]
-offset_left = -9.0
-offset_top = -309.0
-offset_right = 454.0
-offset_bottom = -259.0
-theme = ExtResource("5_xxky2")
-
 [node name="Score" type="Label" parent="UILayer"]
 offset_left = 11.0
 offset_top = -296.0
@@ -120,7 +97,6 @@ theme = ExtResource("6_xxky2")
 text = "Letters to Upgrade: 10"
 
 [node name="Mission" type="Label" parent="UILayer"]
-visible = false
 offset_left = 10.0
 offset_top = -250.0
 offset_right = 586.0
@@ -212,6 +188,6 @@ offset_top = -244.0
 offset_right = 719.0
 offset_bottom = -188.0
 theme = ExtResource("6_xxky2")
-text = "Spelling Room"
+text = "INVENTORY"
 
 [connection signal="button_down" from="Inventory_Button" to="." method="_on_inventory_button_button_down"]
