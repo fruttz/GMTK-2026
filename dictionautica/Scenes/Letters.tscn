@@ -1,11 +1,64 @@
-[gd_scene load_steps=5 format=3 uid="uid://dc3qywifgx4f3"]
+[gd_scene load_steps=10 format=3 uid="uid://dc3qywifgx4f3"]
 
 [ext_resource type="Script" uid="uid://md4l1w1j80jf" path="res://Scenes/letters.gd" id="1_ur7m0"]
 [ext_resource type="Texture2D" uid="uid://6oqf4voc6rej" path="res://Sprites/Letter_Tiles.webp" id="2_wbqax"]
 [ext_resource type="FontFile" uid="uid://dap210v1vfoaq" path="res://Some Time Later.otf" id="3_228xi"]
+[ext_resource type="AudioStream" uid="uid://056rswxim8wb" path="res://Sounds/boop.ogg" id="4_228xi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ur7m0"]
 size = Vector2(97, 97)
+
+[sub_resource type="Animation" id="Animation_wbqax"]
+resource_name = "letter_shake"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.733333, 0.966667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(-8, 0), Vector2(0, 0), Vector2(8, 0), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_228xi"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_qfk1d"]
+resource_name = "idle"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.266667, 0.5, 0.733333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -8), Vector2(0, 0), Vector2(0, 8), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_qfk1d"]
+_data = {
+&"RESET": SubResource("Animation_228xi"),
+&"idle": SubResource("Animation_qfk1d"),
+&"letter_shake": SubResource("Animation_wbqax")
+}
 
 [node name="Letters" type="RigidBody2D"]
 input_pickable = true
@@ -40,3 +93,12 @@ fit_content = true
 horizontal_alignment = 1
 vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_qfk1d")
+}
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_228xi")
+volume_db = 20.0

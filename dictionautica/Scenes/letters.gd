@@ -4,6 +4,7 @@ var letter
 var value
 var sprite
 var dragging = false
+var is_scored = false
 var click_radius = 64
 
 func init(l : String, type: String):
@@ -40,4 +41,21 @@ func _input(event: InputEvent) -> void:
 			position.y = 0 
 		if position.y >= 720:
 			position.y = 720 - 50	
+
+func play_anim():
+	is_scored = true
+	$AnimationPlayer.play("letter_shake")
+	$AudioStreamPlayer2D.play()
+	
+func _physics_process(delta: float) -> void:
+	if !is_scored: 
+		$AnimationPlayer.play("idle")
+	if position.x <= 0:
+		position.x = 0 + 100
+	if position.x >= 1280:
+		position.x = 1280 - 100
+	if position.y <= 0:
+		position.y = 0 
+	if position.y >= 720:
+		position.y = 720 - 50	
 	

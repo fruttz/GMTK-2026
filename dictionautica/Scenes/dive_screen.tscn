@@ -67,6 +67,7 @@ transform = Transform2D(1, 0, 0, 1, 0, 300)
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer"]
 stream = ExtResource("4_hencq")
 autoplay = true
+parameters/looping = true
 
 [node name="Gauge" type="Sprite2D" parent="UILayer"]
 position = Vector2(1168, -208)
