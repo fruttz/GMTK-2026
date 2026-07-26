@@ -53,7 +53,7 @@ func _on_submit_button_down() -> void:
 		get_parent().set_score(word_array.size())
 		for b in bodies:
 			b.modulate = Color.GOLD
-			b.play_anim()
+			b.score_anim()
 			await b.get_node("AnimationPlayer").animation_finished
 			b.queue_free()
 	else:

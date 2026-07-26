@@ -42,10 +42,14 @@ func _input(event: InputEvent) -> void:
 		if position.y >= 720:
 			position.y = 720 - 50	
 
-func play_anim():
+func score_anim():
 	is_scored = true
 	$AnimationPlayer.play("letter_shake")
 	$AudioStreamPlayer2D.play()
+
+func clear_anim():
+	is_scored = true
+	$AnimationPlayer.play("clear")
 	
 func _physics_process(delta: float) -> void:
 	if !is_scored: 
