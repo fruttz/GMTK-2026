@@ -54,12 +54,9 @@ func _unhandled_input(event: InputEvent) -> void:
 				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
 			elif upgrade_increment == 2:
 				score = 30 - offset_score
-				$UILayer/Score.text = "Letters to Upgrade: " + str(score)
-			elif upgrade_increment == 3:
-				score = 40 - offset_score
 				$UILayer/Score.text = "Letters to Victory: " + str(score)
-			elif upgrade_increment == 4:
-				upgrade_increment == 5
+			elif upgrade_increment > 3:
+				upgrade_increment == 4
 				score = 0
 				$UILayer/Score.text = "You won! Endless Score: " + str(-score)
 				show_victory()
@@ -159,9 +156,12 @@ func _physics_process(delta: float) -> void:
 	else:
 		$Inventory_Button.disabled = true
 	
-	if score <= 0 and upgrade_increment < 3:
+	if score <= 0 and upgrade_increment < 2:
 		score = 0
 		$UILayer/Score.text = "Press 'U' to Upgrade!"
+	elif score <= 0 and upgrade_increment == 2:
+		score = 0
+		$UILayer/Score.text = "Press 'U' for Victory!"
 	elif score <= 0 and upgrade_increment >= 3:
 		score = 0
 	
@@ -196,7 +196,7 @@ func toggle_mission():
 func mission1_upgrade():
 	#print("mission1 upgrade")
 	$Submarine.speed_tier += 1
-	$UILayer/Mission/Mission1.text = "- [s]Spell a word at least 7 letter long[/s]"
+	$UILayer/Mission/Mission1.text = "- Submarine Speed Upgraded"
 	$UILayer/UpgradePanel.visible = true
 	$UILayer/UpgradePanel/Sub_Speed.visible = true
 	await get_tree().create_timer(3).timeout
@@ -207,7 +207,7 @@ func mission1_upgrade():
 func mission2_upgrade():
 	#print("mission2 upgrade")
 	$Submarine.omega_speed_tier += 1
-	$UILayer/Mission/Mission2.text = "- [s]Spell a word with adjacent double letters[/s]"
+	$UILayer/Mission/Mission2.text = "- Rotation Speed Upgraded"
 	$UILayer/UpgradePanel.visible = true
 	$UILayer/UpgradePanel/Rot_Speed.visible = true
 	await get_tree().create_timer(3).timeout
@@ -217,7 +217,7 @@ func mission2_upgrade():
 func mission3_upgrade():
 	#print("mission3 upgrade")
 	$Submarine.harpoon_range_tier += 1
-	$UILayer/Mission/Mission3.text = "- [s]Spell a word starting with J,X,Q or Z[/s]"
+	$UILayer/Mission/Mission3.text = "- Claw Range Upgraded"
 	$UILayer/UpgradePanel.visible = true
 	$UILayer/UpgradePanel/Arm_Range.visible = true
 	await get_tree().create_timer(3).timeout

@@ -20,5 +20,4 @@ func _physics_process(delta: float) -> void:
 		fish.position.x += delta*100
 		if fish.position.x > 1600:
 			fish_array.erase(fish)
-			fish.queue_free()
-	print(fish_array)		
+			fish.queue_free()	
