@@ -25,8 +25,11 @@ func read_letters():
 	bodies.sort_custom(func(b1, b2): return b1.position.x < b2.position.x)
 	for b in bodies:
 		letters.append(b.letter)
-	var word = "".join(letters)
-	return word
+	if !letters.is_empty():
+		var word = "".join(letters)
+		return word
+	else:
+		return "zzzz"
 
 func check_adjacent_duplicate(array):
 	for e in range(0, array.size() - 1):
@@ -51,6 +54,10 @@ func _on_submit_button_down() -> void:
 			mission3 = true
 			$"..".mission3_upgrade.emit()
 		get_parent().set_score(word_array.size())
+		#endless score last minute
+		get_parent().endscore += word_array.size()
+		for b in bodies:
+			b.letter = "Z"
 		for b in bodies:
 			b.modulate = Color.GOLD
 			b.score_anim()

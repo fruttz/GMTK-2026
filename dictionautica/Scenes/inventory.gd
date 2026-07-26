@@ -4,6 +4,9 @@ signal mission1_upgrade
 signal mission2_upgrade
 signal mission3_upgrade
 
+#endscore last minute
+var endscore = 0
+
 func setup(letter_array) -> void:
 	#letter_array +=["I","S","I","S","I","S","I","S","I","S","I","S","I","S","I","S","I","S"]
 	$Letter_Container.setup(letter_array)
@@ -19,7 +22,7 @@ func set_score(new_score):
 	elif $"..".upgrade_increment == 2:
 		$"../UILayer/Score".text = "Letters to Victory: " + str($"..".score)
 	elif $"..".upgrade_increment >2 :
-		$"../UILayer/Score".text = "Endless Score " + str(-$"..".score)
+		$"../UILayer/Score".text = "You won! Endless Score: " + str(endscore)
 	
 
 func get_score():

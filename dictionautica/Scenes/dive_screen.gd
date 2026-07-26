@@ -58,7 +58,7 @@ func _unhandled_input(event: InputEvent) -> void:
 			elif upgrade_increment > 3:
 				upgrade_increment == 4
 				score = 0
-				$UILayer/Score.text = "You won! Endless Score: " + str(-score)
+				$UILayer/Score.text ="You won! Endless Score: " + str($Inventory.endscore)
 				show_victory()
 			offset_score = 0
 			oxygen = oxygen_max
