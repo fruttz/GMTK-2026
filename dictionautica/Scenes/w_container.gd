@@ -55,6 +55,7 @@ func _on_submit_button_down() -> void:
 			b.modulate = Color.GOLD
 			b.score_anim()
 			await b.get_node("AnimationPlayer").animation_finished
+		for b in bodies:
 			b.queue_free()
 	else:
 		print("Not a Word!")

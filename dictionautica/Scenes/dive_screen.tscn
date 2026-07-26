@@ -1,9 +1,8 @@
-[gd_scene load_steps=11 format=3 uid="uid://b3jaacl8mtpby"]
+[gd_scene load_steps=10 format=3 uid="uid://b3jaacl8mtpby"]
 
 [ext_resource type="PackedScene" uid="uid://wjvnqaoktxl8" path="res://Scenes/submarine.tscn" id="1_5f54t"]
 [ext_resource type="Texture2D" uid="uid://c7twqmtjujbf1" path="res://Sprites/Placeholder_Sea.png" id="1_hq367"]
 [ext_resource type="Script" uid="uid://db12vk1sdxnos" path="res://Scenes/dive_screen.gd" id="1_lkrc6"]
-[ext_resource type="AudioStream" uid="uid://bsks0mfb0wv4h" path="res://Sounds/Theme.ogg" id="4_hencq"]
 [ext_resource type="PackedScene" uid="uid://b1dnrhw4mr4tc" path="res://Scenes/Inventory.tscn" id="4_lkrc6"]
 [ext_resource type="Texture2D" uid="uid://0woe15g2s4vw" path="res://Sprites/Gauge.png" id="5_ju3w4"]
 [ext_resource type="Theme" uid="uid://dqajn6xkpms6b" path="res://Sans-Serif.tres" id="5_xxky2"]
@@ -65,7 +64,6 @@ offset = Vector2(0, 300)
 transform = Transform2D(1, 0, 0, 1, 0, 300)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="UILayer"]
-stream = ExtResource("4_hencq")
 autoplay = true
 
 [node name="Gauge" type="Sprite2D" parent="UILayer"]
