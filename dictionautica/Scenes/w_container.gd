@@ -52,6 +52,9 @@ func _on_submit_button_down() -> void:
 			$"..".mission3_upgrade.emit()
 		get_parent().set_score(word_array.size())
 		for b in bodies:
+			b.modulate = Color.GOLD
+			b.score_anim()
+			await b.get_node("AnimationPlayer").animation_finished
 			b.queue_free()
 	else:
 		print("Not a Word!")
